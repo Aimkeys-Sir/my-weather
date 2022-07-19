@@ -22,7 +22,7 @@ function App() {
         <NavBar />
         <div style={{ display: "flex" }}>
           <Clouds />
-          <AirQuality />
+         {data.current? <AirQuality airQuality={data.current["air_quality"]}/>:null}
         </div>
       </div>
       {data.forecast ? <ForeCast forecastArr={data.forecast.forecastday[0].hour.filter(item => item.time_epoch > time)} /> : null}
