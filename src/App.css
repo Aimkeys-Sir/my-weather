@@ -114,7 +114,7 @@ input:hover{
 }
 
 .col-2 {
-  width: 50%;
+  display: flex;
 }
 .col-4{
   width: 33%;
@@ -125,7 +125,6 @@ input:hover{
   border-radius: 30px;
   margin-left:20px;
   width: 50%;
-  display: flex;
   border-radius: 21px;
   color: #fcfcfc;
   background: #9463ec;
@@ -186,7 +185,7 @@ margin-bottom: -18px;
   border-radius: 10px;
 }
 .forecast{
-  display: flex;
+  /* display: flex; */
   padding: 10px;
   margin: 20px;
   color: white;
@@ -207,4 +206,5 @@ box-shadow:  9px 9px 18px #3a416b,
 }
 .forecast-item{
   margin-left:2em;
+  
 }
