@@ -1,7 +1,7 @@
 import ForecastItem from "./ForecastItem";
 
 export default function ForeCast({forecastArr}){
-    const updFore=forecastArr.slice(0,4).map(item=>{
+    const updFore=forecastArr.slice(0,8).map(item=>{
         let image=item.condition.code
         image+=item.is_day===0?".night":".day"
         let time=item.time
@@ -14,7 +14,7 @@ export default function ForeCast({forecastArr}){
     return (
         <div className="forecast">
             <h1>ForeCast</h1>
-            <div style={{display:"flex"}}>
+            <div style={{display:"flex",flexWrap:"wrap"}}>
                 {updFore.map(item=>{
                return  <ForecastItem time={item.time} key={item.time} image={item.image} temp={item.temp}/> 
             })}

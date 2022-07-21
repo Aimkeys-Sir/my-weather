@@ -31,14 +31,14 @@ export default function AirQuality({ airQuality }) {
     return (
         <div className="col-6">
             <h3>AIR QUALITY</h3>
-            <div style={{ display: "flex" }}>
+            <div className="img-text-air-div">
                 <div className="air-img-div">
-                    <img src="svg/wi-alien.svg" className="air-img" />
+                    <img src="svg/wi-rain.svg" alt="image" className="air-img" />
                 </div>
-                <div>
+                <div style={{marginLeft:"10px"}}>
                     <div style={{display:"flex"}}>
                         <h1>{Math.round(mainPollutant.value)}</h1>
-                        <h2 style={{marginTop:"30px",marginLeft:"2px"}}>μg/m3</h2>
+                        <h3 style={{marginTop:"10px",marginLeft:"1px",marginBottom:"0"}}>μg/m3</h3>
                     </div>
                     <p>Main Pollutant:<strong style={{color:"white"}}>{mainPollutant.pollutant.toUpperCase()}</strong></p>
                 </div>

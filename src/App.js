@@ -11,23 +11,27 @@ function App() {
   useEffect(() => {
     fetch(`http://api.weatherapi.com/v1/forecast.json?key=b4bb0f58f9a64179ac1103527221807&q=Nairobi&aqi=yes`)
       .then(res => res.json())
-      .then(res => setData(res))
+      .then(res => {
+        setData(res)
+        console.log(res)
+      })
   }, [])
   let time = data.forecast ? data.current.last_updated_epoch : ""
   // time=time.substr(time.length-5,time.length)
-  console.log(data)
+
   return (
-    <div className="App">
-      <div style={{ width: "66.7%" }}>
+    <div>
+      <div>
         <NavBar />
-        <div style={{ display: "flex" }}>
-          <Clouds />
-         {data.current? <AirQuality airQuality={data.current["air_quality"]}/>:null}
-        </div>
+        {data.forecast?<div className='App'>
+          {/* <Clouds forecast={data.forecast.forecastday} current={data.current} /> */}
+          <AirQuality airQuality={data.current["air_quality"]} />
+          {/* <ForeCast
+            forecastArr={data.forecast.forecastday[0].hour.filter(item => item.time_epoch > time)}
+          /> */}
+        </div>:null}
       </div>
-      {data.forecast ? <ForeCast forecastArr={data.forecast.forecastday[0].hour.filter(item => item.time_epoch > time)} /> : null}
-    </div>
-  );
+     </div> )
 }
 
-export default App;
+      export default App;

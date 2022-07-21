@@ -7,23 +7,26 @@ export default function NavBar({ handleSettings, city, handleUpdate }) {
     // a city name and an update button that updates the weather data
     // a search form that the user can search a city
     return (
-        <div className="col-1">
+        <div className="nav-bar">
+            <div id="settingsButton">
+                <FontAwesomeIcon className="settings-icon" icon={faSliders} />
+            </div>
             <div className="city-info">
-                <div style={{ display: "flex" }}>
+                <div className="city-text">
                     <FontAwesomeIcon className="loc-dot" icon={faLocationDot} />
-                    <h2 style={{ marginBottom: "2px" }}>Nairobi,KE</h2>
+                    <h2>Nairobi,KE</h2>
                 </div>
                 <div id="update">
-                    <h3>update</h3>
+                    <p>update</p>
                 </div>
             </div>
-            <form>
-                <FontAwesomeIcon id="search-icon" icon={faSearch} />
-                <input type="text" placeholder=".     City" />
+            <form id="navbar-form"> 
+                <input type="text" placeholder="City" />
+                <button>
+                    <FontAwesomeIcon id="search-icon" icon={faSearch} />
+                </button>
             </form>
-            <div id="settingsButton">
-                <FontAwesomeIcon className="font-awesome" icon={faSliders} />
-            </div>
+
         </div>
     )
 }

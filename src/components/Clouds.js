@@ -1,11 +1,17 @@
-export default function Clouds(){
-    //displays clouds data. raining,snow,cloudy etc
-    //displays temperature and wind
+export default function Clouds({current,forecast}){
+    //displays clouds data. raining,s
+    const currrentItems=Object.keys(current).filter(item=>item==="Humidity"||item==="precip_mm"||item==="feelslike_c")
+    .map(item=>[[item],current[item]])
+    const forecastItems=Object.keys(forecast).filter(item=>item==="daily_chance_of_rain"||item==="daily_chance_of_snow" ||item==="maxtemp_c")
+    .map(item=>[[item],current[item]])
+
+    
     return(
         <div className="col-3">
+            <h2>PRECIPITATION</h2>
             <div className="col-2">
                 <img className="cloud-icon" src="svg/wi-rain.svg"/>
-                <h2>Rain Showers</h2>
+                <h1>{current["precip_mm"]}</h1>
                 <h4>Monday, 18 July</h4>
             </div>
             <div className="col-2">
