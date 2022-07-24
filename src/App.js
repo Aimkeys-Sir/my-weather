@@ -24,7 +24,7 @@ function App() {
       <div>
         <NavBar />
         {data.forecast?<div className='App'>
-          {/* <Clouds forecast={data.forecast.forecastday} current={data.current} /> */}
+          <Clouds forecast={data.forecast.forecastday} current={data.current} />
           <AirQuality airQuality={data.current["air_quality"]} />
           {/* <ForeCast
             forecastArr={data.forecast.forecastday[0].hour.filter(item => item.time_epoch > time)}
