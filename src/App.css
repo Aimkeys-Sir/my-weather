@@ -4,11 +4,13 @@
   color: white;
   padding: 10px;
 }
+
 .col {
   padding: 15px;
   border-radius: 15px;
 
 }
+
 .col-1 {
   display: -ms-inline-grid;
 }
@@ -27,6 +29,7 @@
 
 .col-5 {
   display: -ms-inline-grid;
+  background-color: #402D33;
 }
 
 .col-6 {
@@ -57,7 +60,7 @@
 }
 
 #navbar-form {
- 
+
   width: 250px;
   height: 50px;
   border-radius: 30px;
@@ -97,89 +100,208 @@
   margin-right: 10px;
   font-size: 20px;
 }
-#update{
+
+#update {
   text-align: center;
   justify-content: center;
-  padding:5px 0;
+  padding: 5px 0;
   border-radius: 10px;
   background-color: #204598;
   cursor: pointer;
 }
-#update p{
+
+#update p {
   margin: 0;
 }
-.settings-icon{
+
+.settings-icon {
   font-size: 25px;
   cursor: pointer;
 }
-.air-img{
+
+.air-img {
   width: 50px;
   height: 50px;
-  filter: invert(83%) sepia(41%) saturate(3189%) 
-  hue-rotate(246deg) brightness(100%) contrast(88%);
+  filter: invert(83%) sepia(41%) saturate(3189%) hue-rotate(246deg) brightness(100%) contrast(88%);
 }
-.air-img-div{
+
+.air-img-div {
   background: #61256b86;
   padding: 8px;
- border-radius: 20px;
+  border-radius: 20px;
 }
-.img-text-air-div{
+
+.img-text-air-div {
   display: flex;
 }
-.col-6 h1,p{
+
+.col-6 h1,
+p {
   margin: 0 auto;
 }
-.col-6 p{
+
+.col-6 p {
   color: #ddb3db;
 }
+
 /*here*/
-.cloud-icon{
+.cloud-icon {
   width: 65px;
-  filter: invert(83%) sepia(59%)
-   saturate(2186%) hue-rotate(180deg) 
-   brightness(104%) contrast(102%)
+  filter: invert(83%) sepia(59%) saturate(2186%) hue-rotate(180deg) brightness(104%) contrast(102%)
 }
-.precip-div{
- display: flex;
+
+.precip-div {
+  display: flex;
 }
-.precip-div div{
-  background: linear-gradient(to top,#3487EF, #43538D 50%); 
+
+.precip-div div {
+  background: linear-gradient(to top, #3487EF, #43538D 50%);
   border-radius: 15px;
   padding: 0;
   margin-bottom: 20px;
   margin-top: 10px;
 }
-.col-3 h1,h3{
-margin: 0 2px;
+
+.col-3 h1,
+h3 {
+  margin: 0 2px;
 }
-.col-3 h1{
+
+.col-3 h1 {
   margin-top: 20px;
   margin-left: 10px;
   font-size: 48px;
 
 }
-.precip-images{
+
+.precip-images {
   width: 40px;
 }
-.slider{
+
+.slider {
   background: #308AF4;
   appearance: none;
   border-radius: 10px;
 }
-.slider thumb{
+
+.slider thumb {
   appearance: none;
   background: #ddb3db;
 }
-.p-icons-div{
-  background-color:#41518B;
+
+.p-icons-div {
+  background-color: #41518B;
   margin: 5px;
   border-radius: 5px;
 }
-.p-icons-div img{
-  filter: invert(100%) sepia(0%)
-   saturate(3029%) hue-rotate(280deg)
-    brightness(109%) contrast(81%);
+
+.p-icons-div img {
+  filter: invert(100%) sepia(0%) saturate(3029%) hue-rotate(280deg) brightness(109%) contrast(81%);
 }
-.precipitation-div{
+
+.precipitation-div {
   margin-right: 30px;
+}
+
+.outer {
+  width: 120px;
+  height: 65px;
+  padding: 8px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 25px;
+}
+.outer::after {
+  margin-top: 15px;
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  left: 10px;
+  border-radius: 50%;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  background: #402D33;
+  border: 3px solid;
+} 
+.inner{
+  height: 40px;
+  top:49px;
+  left: 40px;
+  position: absolute;
+  z-index: 2;
+  
+}
+.rotsun{
+transform:rotate(-45deg) translateX(50px);
+}
+.rotmoon{
+  transform:rotate(-45deg) translateX(50px);
+}
+.sunmoon{
+  display: flex;
+}
+.moon{
+  margin-left: 30px;
+}
+.moon::after{
+border-color: #DBDBDB #DBDBDB #9c9b9b #9c9b9b;
+transform: rotate(-90deg);
+}
+.sun::after{
+  border-color: #fac21a #F5C73D #A78E4A #A78E4A;
+  transform: rotate(-85deg);
+}
+.rise-text{
+  display: flex;
+  font-size: 14px;
+}
+.rise-text h4{
+  margin-top: 0px;
+  margin-bottom: 0px;
+ 
+}
+.rise-text p{
+  font-size: 12px;
+  margin-top: 0px;
+  color: #9b9798;
+}
+.sun-line{
+width: 100%;
+height: 2px;
+margin-top: 10px;
+background: #b19ea4;
+}
+.moon-img{
+  width: 80px;
+  position: relative;
+  
+}
+.moon-img::after{
+  position: absolute;
+  width: 57px;
+  height: 57px;
+  left:11px;
+  top:8.5px;
+  border-radius: 50%;
+  content: "";
+  background: #E0E0E0;
+}
+.moon-img img{
+  z-index: 10;
+  position:relative;
+}
+.moon-text{
+  margin-top: 15px;
+}
+.moon-text p{
+  color: #9b9798;
+  font-size: 14px;
+}
+.moon-text h4{
+  margin:0 auto ;
 }

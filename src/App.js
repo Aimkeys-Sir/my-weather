@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import Clouds from './components/Clouds'
 import AirQuality from './components/AirQuality';
 import ForeCast from './components/Forecast';
+import SunMoon from './components/SunMoon';
 
 function App() {
   const [data, setData] = useState({})
@@ -26,9 +27,7 @@ function App() {
         {data.forecast?<div className='App'>
           <Clouds forecast={data.forecast.forecastday} current={data.current} />
           <AirQuality airQuality={data.current["air_quality"]} />
-          {/* <ForeCast
-            forecastArr={data.forecast.forecastday[0].hour.filter(item => item.time_epoch > time)}
-          /> */}
+          <SunMoon/>
         </div>:null}
       </div>
      </div> )
