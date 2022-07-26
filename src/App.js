@@ -6,6 +6,8 @@ import Clouds from './components/Clouds'
 import AirQuality from './components/AirQuality';
 import ForeCast from './components/Forecast';
 import SunMoon from './components/SunMoon';
+import Visibility from './components/Visibility';
+import Temperature from './components/Temperature';
 
 function App() {
   const [data, setData] = useState({})
@@ -28,6 +30,8 @@ function App() {
           <Clouds forecast={data.forecast.forecastday} current={data.current} />
           <AirQuality airQuality={data.current["air_quality"]} />
           <SunMoon/>
+          <Visibility/>
+          <Temperature forecast={data.forecast.forecastday[0].hour}/>
         </div>:null}
       </div>
      </div> )

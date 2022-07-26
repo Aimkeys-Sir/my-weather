@@ -1,4 +1,5 @@
-import QualityItem from "./QualityItem"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {faAngleDown} from "@fortawesome/free-solid-svg-icons"
 
 export default function AirQuality({ airQuality }) {
     const defra = airQuality['gb-defra-index']
@@ -27,11 +28,11 @@ export default function AirQuality({ airQuality }) {
         }
         return aqi
     }
-    // 0-1- clean
-    //1-3- low
-    //3-6- moderate
-    //6-8 - high
-    //8-10 - hazardous
+    // 0-1- clean 1
+    //1-3- low 2
+    //3-6- moderate 3
+    //6-8 - high 2
+    //8-10 - hazardous 2
     //displays air quality
     return (
         <div className="col col-6">
@@ -53,10 +54,21 @@ export default function AirQuality({ airQuality }) {
             <div>
 
             </div>
-            <form class="slidecontainer">
-                <input type="range" min="1" max="10" value={defra} class="slider" id="myRange"/>
-            </form>
-            <h2>Expand</h2>
+            <div className="defra-text">
+                <p>Good</p>
+                <p>Hazardous</p>
+            </div>
+            <div className="color-range">
+            <input type="range" min="0" max="10" value={defra} class="slider" id="myRange"/>
+                <div className="one"></div>
+                <div className="two"></div>
+                <div className="three"></div>
+                <div className="four"></div>
+                <div className="five"></div>
+            </div> 
+            <div className="expand">
+                <FontAwesomeIcon id="angle-down" icon={faAngleDown}/>
+            </div>
         </div>
     )
 }

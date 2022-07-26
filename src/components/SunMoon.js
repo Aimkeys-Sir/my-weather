@@ -56,8 +56,6 @@ export default function SunMoon() {
           </div>
         </div>
         </div>
-
-       
       </div>
       <div></div>
     </div>
