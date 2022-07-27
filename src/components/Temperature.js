@@ -89,7 +89,7 @@ export default function Temperature({ forecast }) {
         </div>
    
         <svg
-          class="temp-svg"
+          className="temp-svg"
           viewBox="0 0 200 200"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -97,19 +97,19 @@ export default function Temperature({ forecast }) {
         >
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="20%" y2="100%">
-              <stop offset="0%" stop-color="#6C473F" />
-              <stop offset="100%" stop-color="#4C294E" />
+              <stop offset="0%" stopColor="#6C473F" />
+              <stop offset="100%" stopColor="#4C294E" />
             </linearGradient>
             <linearGradient id="s-gradient">
-            <stop offset="0%" stop-color="#5D3945"/>
-                <stop offset="2%" stop-color="#4187CC"/>
-                <stop offset="25%" stop-color="#4187CC"/>
-                <stop offset="50%" stop-color="#ED800F"/>
-                <stop offset="75%" stop-color="#ED800F"/>
-                <stop offset="100%" stop-color="#4187CC"/>
+            <stop offset="0%" stopColor="#5D3945"/>
+                <stop offset="2%"stopColor="#4187CC"/>
+                <stop offset="25%" stopColor="#4187CC"/>
+                <stop offset="50%" stopColor="#ED800F"/>
+                <stop offset="75%" stopColor="#ED800F"/>
+                <stop offset="100%" stopColor="#4187CC"/>
             </linearGradient>
           </defs>
-          <path stroke-width={"2px"} fill="url(#gradient)" d={svgPath(pointsArray, bezierCommand)} stroke="url(#s-gradient)"/>
+          <path strokeWidth={"2px"} fill="url(#gradient)" d={svgPath(pointsArray, bezierCommand)} stroke="url(#s-gradient)"/>
         </svg>
         <div style={{position:"relative"}}>
             <FontAwesomeIcon className="temp-dot dot1" style={{top:`${102+(temp_base-dailyTemp[3])*5}px`, left:`${11.5*3}px`}} icon={faDotCircle}/>

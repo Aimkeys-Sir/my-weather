@@ -7,7 +7,6 @@ export default function AirQuality({ airQuality }) {
 
     const mainPollutant = pollutants.reduce(((max, item) => {
         let value = airQuality[item]
-        console.log(`${item}:${value},max.value:${max.value}`)
         if (value > max.value) max = { ...max, pollutant: item, value: value }
         return max
     }), { pollutant: "", value: 0 })
@@ -28,12 +27,6 @@ export default function AirQuality({ airQuality }) {
         }
         return aqi
     }
-    // 0-1- clean 1
-    //1-3- low 2
-    //3-6- moderate 3
-    //6-8 - high 2
-    //8-10 - hazardous 2
-    //displays air quality
     return (
         <div className="col col-6">
             <h3>AIR QUALITY</h3>
@@ -59,7 +52,7 @@ export default function AirQuality({ airQuality }) {
                 <p>Hazardous</p>
             </div>
             <div className="color-range">
-            <input type="range" min="0" max="10" value={defra} class="slider" id="myRange"/>
+            <input type="range" min="0" max="10" defaultValue={defra} className="slider" id="myRange"/>
                 <div className="one"></div>
                 <div className="two"></div>
                 <div className="three"></div>
