@@ -8,6 +8,8 @@ import ForeCast from './components/Forecast';
 import SunMoon from './components/SunMoon';
 import Visibility from './components/Visibility';
 import Temperature from './components/Temperature';
+import SunUv from './components/SunUv';
+import Wind from './components/Wind';
 
 function App() {
   const [data, setData] = useState({})
@@ -29,7 +31,9 @@ function App() {
         {data.forecast?<div className='App'>
           <Clouds forecast={data.forecast.forecastday} current={data.current} />
           <AirQuality airQuality={data.current["air_quality"]} />
+          <Wind/>
           <SunMoon/>
+          <SunUv/>
           <Visibility/>
           <Temperature forecast={data.forecast.forecastday[0].hour}/>
         </div>:null}
