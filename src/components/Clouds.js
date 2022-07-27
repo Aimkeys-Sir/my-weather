@@ -1,11 +1,6 @@
 export default function Clouds({ current, forecast }) {
-    //displays clouds data. raining,s
-    const currrentItems = Object.keys(current).filter(item => item === "Humidity" || item === "precip_mm" || item === "feelslike_c")
-        .map(item => [[item], current[item]])
-    const forecastItems = Object.keys(forecast).filter(item => item === "daily_chance_of_rain" || item === "daily_chance_of_snow" || item === "maxtemp_c")
-        .map(item => [[item], current[item]])
 
-
+        const hour=new Date().getHours()
     return (
         <div className="col col-3">
             <h3>PRECIPITATION</h3>
@@ -23,7 +18,7 @@ export default function Clouds({ current, forecast }) {
                             <img src="svg/wi-raindrops.svg" className="precip-images" />
                         </div>
                         <div>
-                            <h3>68%</h3>
+                            <h3>{current["humidity"]}%</h3>
                             <p>Humidity</p>
                         </div>
                     </div>
@@ -32,7 +27,7 @@ export default function Clouds({ current, forecast }) {
                             <img src="svg/wi-raindrop.svg" className="precip-images" />
                         </div>
                         <div>
-                            <h3>14&deg;</h3>
+                            <h3>{forecast[0].hour[hour]["dewpoint_c"]}&deg;</h3>
                             <p>Dew Point</p>
                         </div>
                     </div>
@@ -43,7 +38,7 @@ export default function Clouds({ current, forecast }) {
                             <img style={{transform:"rotate(45deg)"}} src="svg/wi-umbrella.svg" className="precip-images" />
                         </div>
                         <div>
-                            <h3>10%</h3>
+                            <h3>{forecast[0].day["daily_chance_of_rain"]}%</h3>
                             <p>Chances</p>
                         </div>
                     </div>
