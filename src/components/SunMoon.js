@@ -42,7 +42,7 @@ export default function SunMoon() {
             <img src="svg/wi-moon-alt-waning-crescent-2.svg" />
           </div>
           <div className="moon-text">
-            <h4>Waxing Crescent</h4>
+            <h4>Waxing <br/>Crescent</h4>
             <p>Today</p>
           </div>
         </div>

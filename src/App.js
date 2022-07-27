@@ -18,11 +18,13 @@ function App() {
       .then(res => res.json())
       .then(res => {
         setData(res)
-        console.log(res)
       })
+      fetch("http://localhost:9003/userdata")
+      .then(r=>r.json())
+      .then(data=>console.log(data.aimkeys))
   }, [])
+  console.log(data)
   let time = data.forecast ? data.current.last_updated_epoch : ""
-  // time=time.substr(time.length-5,time.length)
 
   return (
     <div>
@@ -30,12 +32,12 @@ function App() {
         <NavBar />
         {data.forecast?<div className='App'>
           <Clouds forecast={data.forecast.forecastday} current={data.current} />
-          <AirQuality airQuality={data.current["air_quality"]} />
-          <Wind/>
+          <AirQuality airQuality={data.current["air_quality"]} /> 
+         <Temperature forecast={data.forecast.forecastday[0].hour}/>
+          <Wind/> 
+          <Visibility/>
           <SunMoon/>
           <SunUv/>
-          <Visibility/>
-          <Temperature forecast={data.forecast.forecastday[0].hour}/>
         </div>:null}
       </div>
      </div> )

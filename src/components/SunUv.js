@@ -11,8 +11,8 @@ export default function SunUv(){
                     <h3>uvi</h3>
                 </div>
             </div>
-            <h4>Moderate UV</h4>
-            <p>Moderate risk of harm from sun utra-violet rays.</p>
+            <h4 style={{margin:"0px"}}>Moderate UV</h4>
+            <p style={{margin:"0px"}}>Moderate risk of harm from sun utra-violet rays.</p>
         </div>
     )
 }
