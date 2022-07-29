@@ -79,7 +79,7 @@ export default function Temperature({ forecast }) {
   return (
     <div className="col col-4">
       <div>
-        <h4 style={{margin:"6px"}}>FORECASTS</h4>
+        <h4 style={{margin:"7px"}}>TEMPERATURE</h4>
         <div className="day-text">
                  <h4>Dawn</h4>
                  <h4>Morning</h4>
@@ -112,20 +112,20 @@ export default function Temperature({ forecast }) {
           <path strokeWidth={"2px"} fill="url(#gradient)" d={svgPath(pointsArray, bezierCommand)} stroke="url(#s-gradient)"/>
         </svg>
         <div style={{position:"relative"}}>
-            <FontAwesomeIcon className="temp-dot dot1" style={{top:`${102+(temp_base-dailyTemp[3])*5}px`, left:`${11.5*3}px`}} icon={faDotCircle}/>
-            <FontAwesomeIcon className="temp-dot dot2" style={{top:`${105+(temp_base-dailyTemp[8])*5}px`, left:`${11.5*8}px`}} icon={faDotCircle}/>
-            <FontAwesomeIcon className="temp-dot dot3" style={{top:`${102+(temp_base-dailyTemp[13])*5}px`, left:`${11*13}px`}} icon={faDotCircle}/>
-            <FontAwesomeIcon className="temp-dot dot4" style={{top:`${65+(temp_base-dailyTemp[19])*5}px`, left:`${11.2*19}px`}} icon={faDotCircle}/>
-            <FontAwesomeIcon className="temp-dot dot5" style={{top:`${65+(temp_base-dailyTemp[22])*5}px`, left:`${11.5*23}px`}} icon={faDotCircle}/>
+            <FontAwesomeIcon className="temp-dot dot1" style={{top:`${130+(temp_base-dailyTemp[3])*5}px`, left:`${14.4*3}px`}} icon={faDotCircle}/>
+            <FontAwesomeIcon className="temp-dot dot2" style={{top:`${130+(temp_base-dailyTemp[8])*5}px`, left:`${14.4*8}px`}} icon={faDotCircle}/>
+            <FontAwesomeIcon className="temp-dot dot3" style={{top:`${110+(temp_base-dailyTemp[13])*5}px`, left:`${14.4*13}px`}} icon={faDotCircle}/>
+            <FontAwesomeIcon className="temp-dot dot4" style={{top:`${95+(temp_base-dailyTemp[19])*5}px`, left:`${14.4*19}px`}} icon={faDotCircle}/>
+            <FontAwesomeIcon className="temp-dot dot5" style={{top:`${105+(temp_base-dailyTemp[22])*5}px`, left:`${14.4*22}px`}} icon={faDotCircle}/>
         </div>
         <div className="temp-forecasts">
-            <p style={{top:`${112+(temp_base-dailyTemp[3])*5}px`, left:`${10*3}px`}}>{dailyTemp[3]}&deg;</p>
-            <p style={{top:`${115+(temp_base-dailyTemp[8])*5}px`, left:`${10*8}px`}}>{dailyTemp[8]}&deg;</p>
-            <p style={{top:`${112+(temp_base-dailyTemp[13])*5}px`, left:`${10*13}px`}}>{dailyTemp[13]}&deg;</p>
-            <p style={{top:`${112+(temp_base-dailyTemp[19])*5}px`, left:`${10*19}px`}}>{dailyTemp[19]}&deg;</p>
-            <p style={{top:`${112+(temp_base-dailyTemp[22])*5}px`, left:`${11.5*22}px`}}>{dailyTemp[22]}&deg;</p>
+            <p style={{top:`${140+(temp_base-dailyTemp[3])*7}px`, left:`${14*3}px`}}>{dailyTemp[3]}&deg;</p>
+            <p style={{top:`${140+(temp_base-dailyTemp[8])*7}px`, left:`${14*8}px`}}>{dailyTemp[8]}&deg;</p>
+            <p style={{top:`${130+(temp_base-dailyTemp[13])*7}px`, left:`${14*13}px`}}>{dailyTemp[13]}&deg;</p>
+            <p style={{top:`${120+(temp_base-dailyTemp[19])*7}px`, left:`${14*19}px`}}>{dailyTemp[19]}&deg;</p>
+            <p style={{top:`${120+(temp_base-dailyTemp[22])*7}px`, left:`${14*22}px`}}>{dailyTemp[22]}&deg;</p>
         </div>
-        <div className="temp-images-div"> 
+        {/* <div className="temp-images-div"> 
                  <div className="temp-switch">
                     <img src="svg/wi-thermometer-exterior.svg"/>
                </div>
@@ -135,7 +135,7 @@ export default function Temperature({ forecast }) {
                <div className="sele">
                     <img src="svg/wi-thermometer-exterior.svg"/>
                </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -37,6 +37,15 @@ export default function SunMoon() {
         </div>
         <div className="sun-line"></div>
         <div style={{display:"flex"}}>
+        <div style={{display:"flex"}}>
+                <div className="sunUv-div">
+                    <img alt="sun" src="1000.day-svg.png"/>
+                </div>
+                <div className="uv-text">
+                    <h1>7</h1>
+                    <h3>uvi</h3>
+                </div>
+            </div>
            <div style={{ display: "flex" }}>
           <div className="moon-img">
             <img src="svg/wi-moon-alt-waning-crescent-2.svg" />
@@ -46,7 +55,7 @@ export default function SunMoon() {
             <p>Today</p>
           </div>
         </div>
-        <div style={{ display: "flex" }}>
+        {/* <div style={{ display: "flex" }}>
           <div className="moon-img">
             <img src="svg/wi-moon-new.svg" />
           </div>
@@ -54,7 +63,7 @@ export default function SunMoon() {
             <h4>Moon Illumination</h4>
             <p>14</p>
           </div>
-        </div>
+        </div> */}
         </div>
       </div>
       <div></div>

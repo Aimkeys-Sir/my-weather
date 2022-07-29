@@ -9,7 +9,7 @@ export default function NavBar({ handleSettings, city, handleUpdate }) {
     return (
         <div className="nav-bar">
             <div id="settingsButton">
-                <FontAwesomeIcon className="settings-icon" icon={faSliders} />
+                <FontAwesomeIcon className="settings-icon-clicked" icon={faSliders} />
             </div>
             <div className="city-info">
                 <div className="city-text">
@@ -26,7 +26,6 @@ export default function NavBar({ handleSettings, city, handleUpdate }) {
                     <FontAwesomeIcon id="search-icon" icon={faSearch} />
                 </button>
             </form>
-
         </div>
     )
 }
