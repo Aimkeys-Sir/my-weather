@@ -1,18 +1,32 @@
 export default function Clouds({ current, forecast }) {
-
-        const hour=new Date().getHours()
+    let image = current.condition.code;
+    image += current.is_day === 0 ? ".night" : ".day";
+    const hour = new Date().getHours()
     return (
         <div className="col col-3">
             <h3>PRECIPITATION</h3>
-            <div className="precip-div">
-                <div>
-                    <img className="cloud-icon" src="svg/wi-raindrop.svg" />
+            <div style={{ display: "flex" }}>
+                <div className="precip-div">
+                    <div>
+                        <img className="precip-icon" src="svg/wi-raindrop.svg" />
+                    </div>
+                    <h1>{current["precip_mm"]}</h1>
+                    <h3 style={{ marginTop: "45px", marginLeft: "-2px" }}>mm</h3>
                 </div>
-                <h1>{current["precip_mm"]}</h1>
-                <h3 style={{ marginTop: "45px", marginLeft: "-2px" }}>mm</h3>
+                <div className="precip-cloud-div">
+                    <div>
+                        <img className="cloud-icon" src={`svg/${image}.svg`} />
+                    </div>
+                    <div>
+                        <h3>{current.condition.text}</h3>
+                        <p>{current.condition.code}</p>
+                    </div>
+
+                </div>
             </div>
-            <div style={{display:"flex"}}>
-                <div  className="precipitation-div">
+
+            <div style={{ display: "flex" }}>
+                <div className="precipitation-div">
                     <div style={{ display: "flex" }}>
                         <div className="p-icons-div">
                             <img src="svg/wi-raindrops.svg" className="precip-images" />
@@ -35,7 +49,7 @@ export default function Clouds({ current, forecast }) {
                 <div className="precipitation-div">
                     <div style={{ display: "flex" }}>
                         <div className="p-icons-div">
-                            <img style={{transform:"rotate(45deg)"}} src="svg/wi-umbrella.svg" className="precip-images" />
+                            <img style={{ transform: "rotate(45deg)" }} src="svg/wi-umbrella.svg" className="precip-images" />
                         </div>
                         <div>
                             <h3>{forecast[0].day["daily_chance_of_rain"]}%</h3>

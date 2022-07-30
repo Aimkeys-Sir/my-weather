@@ -25,7 +25,7 @@ function App() {
       .then(console.log)
   }, [place])
   console.log(data)
-  let time = data.forecast ? data.current.last_updated_epoch : "";
+  //let time = data.forecast ? data.current.last_updated_epoch : "";
 
   function handleOnAutoClick(place){
     setPlace(place)

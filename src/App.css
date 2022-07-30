@@ -162,9 +162,11 @@ font-weight: 700;
 .settings-icon {
   font-size: 30px;
   cursor: pointer;
+  transition: .4s;
 }
 
 .settings-icon-clicked {
+  transition: .4s;
   position: absolute;
   left: -40px;
   color: #ffffff;
@@ -201,11 +203,29 @@ font-weight: 700;
 /*here*/
 .cloud-icon {
   width: 65px;
+  filter: invert(5);
+  
+}
+.precip-icon{
+  width: 65px;
   filter: invert(83%) sepia(59%) saturate(2186%) hue-rotate(180deg) brightness(104%) contrast(102%);
 }
-
 .precip-div {
   display: flex;
+} 
+.precip-cloud-div{
+  display: flex;
+}
+.precip-cloud-div{
+  background: linear-gradient(to top, #3487ef, #43538d 50%);
+  border-radius: 15px;
+  padding: 0;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  width: 70px;
+}
+.precip-cloud-div h3,p{
+margin: 0 0 0 12px;
 }
 
 .precip-div div {
@@ -605,7 +625,7 @@ p {
 }
 
 .day-text h4 {
-  margin: 0 9px 10px;
+  margin: 0 17px 10px;
   font-size: 14px;
   font-weight: 1400;
 }
@@ -696,10 +716,8 @@ p {
 
 .settings {
   color: white;
-  /* border:solid #eee;
-  border-width: 0 1px 0 0; */
+  transition: .4s;
   width: 90%;
-  /* background-color: rgba(16, 05, 47, 0.2); */
   background: #0E0329;
   box-shadow: 32px 32px 64px #09021a,
     -32px -32px 64px #130438;
@@ -726,14 +744,17 @@ p {
 }
 
 .avatars img {
-  padding: 10px 0 0 3px;
-  height: 60px;
+  /* padding: 10px 0 0 3px; */
+  margin: 0 4px 0 0;
+  height: 80px;
+  border-radius: 50%;
   /* filter: invert(10); */
 }
 
 .avatars {
   margin: 25px 0 0 8px;
   border-radius: 50%;
+  position: relative;
   height: 80px;
   width: 80px;
   background: rgba(255, 255, 255, 0.801);
@@ -791,4 +812,9 @@ p {
   -webkit-transform: translateX(14px);
   -ms-transform: translateX(14px);
   transform: translateX(14px);
+}
+.g-signin{
+  position: absolute;
+  top:40px;
+  left: 100px;
 }
