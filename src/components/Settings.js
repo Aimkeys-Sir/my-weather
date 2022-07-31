@@ -1,13 +1,14 @@
+import { to } from "mathjs"
 import { useState } from "react"
 import Login from "./Login"
 
 export default function Settings({ alerts, setAlerts }) {
-    const [toggles, setToggles] = useState({ temp: true, precip: true, wind: true })
+    const [toggles, setToggles] = useState(true)
     const [userInfo,setUserInfo]=useState({imageUrl:"svg/wi-alien.svg"})
 
     function handleToggleChange(e) {
-        console.log(`${e.target.name}:${e.target.value}`)
-        setToggles(toggles => ({ ...toggles, [e.target.name]: e.target.value }))
+        // console.log(`${e.target.name}:${e.target.value}`)
+        setToggles(toggles=>!toggles)
     }
 
     function handleOnSignIn(isSuccess,profile){
@@ -30,10 +31,10 @@ export default function Settings({ alerts, setAlerts }) {
             <h2>Preferences</h2>
             <h3>Temperature</h3>
             <div style={{ display: "flex" }}>
-                <p>{toggles.temp ? "Fahrenheit" : "Celcius"}</p>
-                <div>
+                <p>{toggles ?"Celcius"  :"Fahrenheit" }</p>
+                <div onClick={handleToggleChange}>
                     <label className="toggle-switch">
-                        <input  onChange={handleToggleChange} value={toggles.temp} id="temp-toggle" type="checkbox" />
+                        <input  onChange={handleToggleChange} value={toggles} id="temp-toggle" type="checkbox" />
                         <span name="temp" onClick={handleToggleChange} className="slider-round"></span>
                     </label>
                 </div>
@@ -42,10 +43,10 @@ export default function Settings({ alerts, setAlerts }) {
             <div className="settings-line"></div>
             <h3>Precipitation</h3>
             <div style={{ display: "flex" }}>
-                <p>{toggles.precip ? "inches" : "mm"}</p>
+                <p>{toggles ? "inches" : "mm"}</p>
                 <div>
                     <label className="toggle-switch">
-                        <input name="precip" value={toggles.precip} onChange={handleToggleChange} id="temp-toggle" type="checkbox" />
+                        <input name="precip" value={toggles} onChange={handleToggleChange} id="temp-toggle" type="checkbox" />
                         <span className="slider-round"></span>
                     </label>
                 </div>
@@ -54,10 +55,10 @@ export default function Settings({ alerts, setAlerts }) {
             <div className="settings-line"></div>
             <h3>Wind</h3>
             <div style={{ display: "flex" }}>
-                <p>{toggles.wind ? "mph" : "km/h"}</p>
+                <p>{toggles ? "mph" : "km/h"}</p>
                 <div>
                     <label className="toggle-switch">
-                        <input name="wind" value={toggles.wind} onChange={handleToggleChange} id="temp-toggle" type="checkbox" />
+                        <input name="wind" value={toggles} onChange={handleToggleChange} id="temp-toggle" type="checkbox" />
                         <span className="slider-round"></span>
                     </label>
                 </div>

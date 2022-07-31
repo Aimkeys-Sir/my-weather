@@ -174,12 +174,6 @@ font-weight: 700;
   cursor: pointer;
 }
 
-.air-img {
-  width: 50px;
-  height: 50px;
-  filter: invert(83%) sepia(41%) saturate(3189%) hue-rotate(246deg) brightness(100%) contrast(88%);
-}
-
 .air-img-div {
   background: #61256b86;
   padding: 8px;

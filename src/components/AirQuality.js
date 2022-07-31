@@ -1,12 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {faAngleDown} from "@fortawesome/free-solid-svg-icons"
+import { faAngleDown,faFaceGrin,faMaskFace,faFaceSadTear,faFaceGrinTears } from "@fortawesome/free-solid-svg-icons"
 
 export default function AirQuality({ airQuality }) {
     const defra = airQuality['gb-defra-index']
-    const pollutants = Object.keys(airQuality).filter(key => key !== "gb-defra-index" && key !== "us-epa-index")
+    const defras = {
+        no2: airQuality["no2"] / 67,
+        so2: airQuality["so2"] / 88,
+        pm2_5: airQuality["pm.5"] / 11,
+        pm10: airQuality["pm10"] / 16,
+        o3:airQuality.o3/33
+    }
 
-    const mainPollutant = pollutants.reduce(((max, item) => {
-        let value = airQuality[item]
+
+    const mainPollutant = Object.keys(defras).reduce(((max, item) => {
+        let value = defras[item]
         if (value > max.value) max = { ...max, pollutant: item, value: value }
         return max
     }), { pollutant: "", value: 0 })
@@ -14,16 +21,16 @@ export default function AirQuality({ airQuality }) {
     function formatAirQ(defra) {
         let aqi = {}
         if (defra < 2) {
-            aqi = { defra: defra, summary: "Clean Air", message: "You got to enjoy this!!" }
+            aqi = { defra: defra, summary: "Clean Air", message: "You got to enjoy this!!", image:faFaceGrinTears}
         }
-        else if (defra>1&&defra < 4) {
-            aqi = { defra: defra, summary: "Low Pollution", message: "Enjoy the day, the air is good!" }
+        else if (defra > 1 && defra < 4) {
+            aqi = { defra: defra, summary: "Low Pollution", message: "Enjoy the day, the air is good!",image:faFaceGrin }
         } else if (defra > 3 && defra < 7) {
-            aqi = { defra: defra, summary: "Moderate Pollution", message: "The air is not so cool. If you have lung problems or heart problems, please avoid strenous activities and stay indoors." }
+            aqi = {image:faFaceSadTear, defra: defra, summary: "Moderate Pollution", message: "The air is not so cool. If you have lung problems or heart problems, please avoid strenous activities and stay indoors." }
         } else if (defra < 9 && defra > 6) {
-            aqi = { defra: defra, summary: "High Pollution", message: "Anyone experiencing discomfort such as sore eyes, cough or sore throat should consider reducing activity, particularly outdoors." }
+            aqi = {image:faMaskFace, defra: defra, summary: "High Pollution", message: "Anyone experiencing discomfort such as sore eyes, cough or sore throat should consider reducing activity, particularly outdoors." }
         } else if (defra > 8) {
-            aqi = { defra: defra, summary: "Hazardous", message: "Reduce physical exertion, particularly outdoors, especially if you experience symptoms such as cough or sore throat" }
+            aqi = { image:faMaskFace, defra: defra, summary: "Hazardous", message: "Reduce physical exertion, particularly outdoors, especially if you experience symptoms such as cough or sore throat" }
         }
         return aqi
     }
@@ -32,11 +39,11 @@ export default function AirQuality({ airQuality }) {
             <h3>AIR QUALITY</h3>
             <div className="img-text-air-div">
                 <div className="air-img-div">
-                    <img src="svg/wi-rain.svg" alt="image" className="air-img" />
+                    <FontAwesomeIcon style={{fontSize:"48px",color:"#FC66EA"}} icon={formatAirQ(defra).image}/>
                 </div>
                 <div style={{ marginLeft: "10px" }}>
                     <div style={{ display: "flex" }}>
-                        <h1>{Math.round(mainPollutant.value)}</h1>
+                        <h1>{Math.round(airQuality[mainPollutant.pollutant])}</h1>
                         <h3 style={{ marginTop: "10px", marginLeft: "1px", marginBottom: "0" }}>μg/m3</h3>
                     </div>
                     <p>Main Pollutant:<strong style={{ color: "white" }}>{mainPollutant.pollutant.toUpperCase()}</strong></p>
@@ -52,15 +59,15 @@ export default function AirQuality({ airQuality }) {
                 <p>Hazardous</p>
             </div>
             <div className="color-range">
-            <input type="range" min="0" max="10"value={defra} className="slider" id="myRange"/>
+                <input type="range" min="0" max="10" value={defra} className="slider" id="myRange" />
                 <div className="one"></div>
                 <div className="two"></div>
                 <div className="three"></div>
                 <div className="four"></div>
                 <div className="five"></div>
-            </div> 
+            </div>
             <div className="expand">
-                <FontAwesomeIcon id="angle-down" icon={faAngleDown}/>
+                <FontAwesomeIcon id="angle-down" icon={faAngleDown} />
             </div>
         </div>
     )
