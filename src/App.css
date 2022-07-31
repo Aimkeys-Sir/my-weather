@@ -812,3 +812,65 @@ p {
   top:40px;
   left: 100px;
 }
+.aqi{
+  padding: 20px;
+  background: #4c284f;
+  width: 100%;
+  height: 200vh;
+  color: white;
+}
+.aqi-head{
+  padding: 5px 30px 0 20px;
+  display: flex;
+  flex-wrap:wrap ;
+  justify-content:space-between ;
+}
+.bars{
+  background: linear-gradient(to top,green 15px, blue 100px, red);
+  margin: 5px;
+box-shadow:  6px 6px 12px #361c38,
+             -6px -6px 12px #623466;
+}
+.bars-cont{
+  position: relative;
+  display:flex;
+  align-items: baseline;
+}
+.polls{ 
+  margin: 10px;
+  /* border: 2px solid black; */
+  background: linear-gradient(145deg, #442447, #512b55);
+box-shadow:  9px 9px 18px #361c38,
+             -9px -9px 18px #623466;
+}
+.polls tr,td,th{
+  text-align: center;
+  border-spacing: 5px;
+padding: 10px; 
+  border: 2px solid black;
+  border-collapse:separate;
+  border-radius: 0px;
+}
+.polls th{
+  font-weight: 800;
+}
+.p-index{
+  padding: 4px;
+  margin:20px ;
+background: linear-gradient(145deg, #442447, #512b55);
+box-shadow:  9px 9px 18px #361c38,
+             -9px -9px 18px #623466;
+}
+.p-index h4{
+  margin: 20px;
+}
+.defra-info p{
+margin: 5px;
+}
+.defra-info{
+  padding:10px ;
+  margin: 20px;
+background: linear-gradient(145deg, #442447, #512b55);
+box-shadow:  10px 10px 20px #311a33,
+             -10px -10px 20px #67366b;
+}
