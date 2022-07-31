@@ -19,9 +19,8 @@ export default function Clouds({ current, forecast }) {
                     </div>
                     <div>
                         <h3>{current.condition.text}</h3>
-                        <p>{current.condition.code}</p>
+                        <p style={{ margin: "0 0 0 14px" }}>{current.cloud}%</p>
                     </div>
-
                 </div>
             </div>
 

@@ -13,6 +13,7 @@ import Temperature from "./components/Temperature";
 import Wind from "./components/Wind";
 import Settings from "./components/Settings";
 import AirQualityPage from "./components/AirQualityPage";
+import PrecipitationPage from "./components/PrecipitationPage";
 
 function App() {
   const [alerts, setAlerts] = useState()
@@ -68,33 +69,36 @@ let defras
     return aqi
 }
   return (
+    // <div>
+    //  {data.current?<PrecipitationPage  data={data}/>:null} 
+    // </div>
 
-    <div>
-     {airQuality? <AirQualityPage city={data.location.name} date={data.current.last_updated_epoch} defras={defras} airQuality={airQuality} aqi={formatAirQ(airQuality['gb-defra-index'])}/>:null}
+    // <div>
+    //  {airQuality? <AirQualityPage city={data.location.name} date={data.current.last_updated_epoch} defras={defras} airQuality={airQuality} aqi={formatAirQ(airQuality['gb-defra-index'])}/>:null}
+    // </div>
+    <div style={{ display: "flex" }}>
+     {showSideBar?<Settings alerts={alerts} setAlerts={setAlerts}/>:null} 
+      <div>
+        <div>
+         {data.location?<NavBar onHamClick={handleOnHamClick} showSideBar={showSideBar}  location={data.location} onAutoClick={handleOnAutoClick}/>:null} 
+          {data.forecast ? (
+            <div className="App">
+              <Clouds
+                forecast={data.forecast.forecastday}
+                current={data.current}
+              />
+              <AirQuality airQuality={data.current.air_quality} defras={defras} aqi={formatAirQ(airQuality['gb-defra-index'])} />
+              <Temperature forecast={data.forecast.forecastday[0].hour} />
+              <Wind />
+              <Visibility />
+              <SunMoon />
+              <ForeCast forecastArr={data.forecast.forecastday[0].hour} />
+            </div>
+          ) : null}
+        </div>
+      </div>
     </div>
-  //   <div style={{ display: "flex" }}>
-  //    {showSideBar?<Settings alerts={alerts} setAlerts={setAlerts}/>:null} 
-  //     <div>
-  //       <div>
-  //        {data.location?<NavBar onHamClick={handleOnHamClick} showSideBar={showSideBar}  location={data.location} onAutoClick={handleOnAutoClick}/>:null} 
-  //         {data.forecast ? (
-  //           <div className="App">
-  //             <Clouds
-  //               forecast={data.forecast.forecastday}
-  //               current={data.current}
-  //             />
-  //             <AirQuality airQuality={data.current.air_quality} defras={defras} aqi={formatAirQ(airQuality['gb-defra-index'])} />
-  //             <Temperature forecast={data.forecast.forecastday[0].hour} />
-  //             <Wind />
-  //             <Visibility />
-  //             <SunMoon />
-  //             <ForeCast forecastArr={data.forecast.forecastday[0].hour} />
-  //           </div>
-  //         ) : null}
-  //       </div>
-  //     </div>
-  //   </div>
-  // 
+  
   )
 }
 

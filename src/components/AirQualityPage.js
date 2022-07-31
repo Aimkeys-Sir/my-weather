@@ -1,27 +1,12 @@
 import AqiSlider from "./AqiSlider";
 import Bars from "./Bars";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faLocationDot} from "@fortawesome/free-solid-svg-icons"
+import PageHeaders from "./PageHeaders";
  
 
 export default function AirQualityPage({ airQuality, defras, aqi,city,time,date }) {
-    console.log(airQuality)
-    const dates=Date(date)
     return (
         <div className="aqi">
-            <div className="aqi-head">
-                <h2>AIR QUALITY </h2>
-                <div style={{display:"flex"}}>
-                    <FontAwesomeIcon style={{margin:"28px 5px 0"}} icon={faLocationDot}/>
-                   <h2>{city}</h2>     
-                </div>
-  
-                <div>
-                    <h3>{dates.slice(0,15)}</h3>
-                    <p>{dates.slice(15,21)}</p>
-                </div>
-                
-            </div>
+           <PageHeaders page={"AIR QUALITY"} city={city} date={date}/>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
                 <div className="p-index">
                     <h4>Pollution Index</h4>

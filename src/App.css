@@ -106,24 +106,27 @@
   background: #10052E;
   box-shadow: 15px 15px 30px #0a031d,
     -15px -15px 30px #16073f;
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .auto-complete p {
   margin: 3px;
   color: rgb(206, 205, 205);
 }
-.auto-complete-line{
+
+.auto-complete-line {
   width: 80%;
   margin: 4px;
   height: 1px;
   background: rgb(206, 205, 205);
 }
-.auto-div:hover{
-color:#01a17a;
-transition: .2s;
-font-weight: 700;
+
+.auto-div:hover {
+  color: #01a17a;
+  transition: .2s;
+  font-weight: 700;
 }
+
 .auto-complete h3 {
   margin: 0 16px 0 0;
 }
@@ -198,19 +201,28 @@ font-weight: 700;
 .cloud-icon {
   width: 65px;
   filter: invert(5);
-  
+
 }
-.precip-icon{
+
+.precip-icon {
   width: 65px;
   filter: invert(83%) sepia(59%) saturate(2186%) hue-rotate(180deg) brightness(104%) contrast(102%);
 }
+.fonta{
+  font-size: 36px;
+  color: hsl(214, 100%, 65%);
+  margin-top: 5px;
+}
+
 .precip-div {
   display: flex;
-} 
-.precip-cloud-div{
+}
+
+.precip-cloud-div {
   display: flex;
 }
-.precip-cloud-div{
+
+.precip-cloud-div {
   background: linear-gradient(to top, #3487ef, #43538d 50%);
   border-radius: 15px;
   padding: 0;
@@ -218,8 +230,10 @@ font-weight: 700;
   margin-top: 10px;
   width: 70px;
 }
-.precip-cloud-div h3,p{
-margin: 0 0 0 12px;
+
+.precip-cloud-div h3,
+p {
+  margin: 0 0 0 12px;
 }
 
 .precip-div div {
@@ -807,70 +821,114 @@ p {
   -ms-transform: translateX(14px);
   transform: translateX(14px);
 }
-.g-signin{
+
+.g-signin {
   position: absolute;
-  top:40px;
+  top: 40px;
   left: 100px;
 }
-.aqi{
+
+.aqi {
   padding: 20px;
   background: #4c284f;
   width: 100%;
   height: 200vh;
   color: white;
 }
-.aqi-head{
+
+.aqi-head {
   padding: 5px 30px 0 20px;
   display: flex;
-  flex-wrap:wrap ;
-  justify-content:space-between ;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-.bars{
-  background: linear-gradient(to top,green 15px, blue 100px, red);
+
+.bars {
+  background: linear-gradient(to top, green 15px, blue 100px, red);
   margin: 5px;
-box-shadow:  6px 6px 12px #361c38,
-             -6px -6px 12px #623466;
+  box-shadow: 6px 6px 12px #361c38,
+    -6px -6px 12px #623466;
 }
-.bars-cont{
+
+.bars-cont {
   position: relative;
-  display:flex;
+  display: flex;
   align-items: baseline;
 }
-.polls{ 
+
+.polls {
   margin: 10px;
   /* border: 2px solid black; */
   background: linear-gradient(145deg, #442447, #512b55);
-box-shadow:  9px 9px 18px #361c38,
-             -9px -9px 18px #623466;
+  box-shadow: 9px 9px 18px #361c38,
+    -9px -9px 18px #623466;
 }
-.polls tr,td,th{
+
+.polls tr,
+td,
+th {
   text-align: center;
   border-spacing: 5px;
-padding: 10px; 
+  padding: 10px;
   border: 2px solid black;
-  border-collapse:separate;
+  border-collapse: separate;
   border-radius: 0px;
 }
-.polls th{
+
+.polls th {
   font-weight: 800;
 }
-.p-index{
+
+.p-index {
   padding: 4px;
-  margin:20px ;
-background: linear-gradient(145deg, #442447, #512b55);
-box-shadow:  9px 9px 18px #361c38,
-             -9px -9px 18px #623466;
+  margin: 20px;
+  background: linear-gradient(145deg, #442447, #512b55);
+  box-shadow: 9px 9px 18px #361c38,
+    -9px -9px 18px #623466;
 }
-.p-index h4{
+
+.p-index h4 {
   margin: 20px;
 }
-.defra-info p{
-margin: 5px;
+
+.defra-info p {
+  margin: 5px;
 }
-.defra-info{
-  padding:10px ;
+
+.defra-info {
+  padding: 10px;
   margin: 20px;
-background: linear-gradient(145deg, #442447, #512b55);
-box-shadow:  10px 10px 20px #311a33,
-             -10px -10px 20px #67366b;
+  background: linear-gradient(145deg, #442447, #512b55);
+  box-shadow: 10px 10px 20px #311a33,
+    -10px -10px 20px #67366b;
 }
+
+.precip-page {
+  color: white;
+  background: #1f2f73;
+  width: 100%;
+  height: 200vh;
+  padding: 20px;
+}
+
+.page-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.precip-content {
+  padding: 10px;
+  margin: 20px;
+  background: linear-gradient(145deg, #1c2a68, #21327b);
+  box-shadow: 6px 6px 12px #18255a,
+    -6px -6px 12px #26398c;
+}
+.precip-content h3{
+  margin: 15px 20px 15px 5px;
+  font-weight: 800;
+}
+.precip-content tr,td,table{
+padding: 10px;
+margin: 5px 10px 5px 5px;
+}
+
