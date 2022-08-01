@@ -1,6 +1,6 @@
 import { to } from "mathjs"
 import { useState } from "react"
-import Login from "./Login"
+// import Login from "./Login"
 
 export default function Settings({ alerts, setAlerts }) {
     const [toggles, setToggles] = useState(true)
@@ -26,7 +26,7 @@ export default function Settings({ alerts, setAlerts }) {
                     </div>
                    {userInfo.googleId? <p>{userInfo.name}</p>:null}
                 </div>
-                <Login onSignIn={handleOnSignIn} onSignOut={handleOnSignOut}/>
+                {/* <Login onSignIn={handleOnSignIn} onSignOut={handleOnSignOut}/> */}
             </div>
             <h2>Preferences</h2>
             <h3>Temperature</h3>

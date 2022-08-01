@@ -1,10 +1,17 @@
+import { Link, useHistory } from "react-router-dom";
+
 export default function Clouds({ current, forecast }) {
     let image = current.condition.code;
     image += current.is_day === 0 ? ".night" : ".day";
     const hour = new Date().getHours()
+    const history=useHistory()
+    function handleClick(){
+        history.push("/precipitation")
+    }
+
     return (
-        <div className="col col-3">
-            <h3>PRECIPITATION</h3>
+        <div onClick={handleClick} className="col col-3">
+           <h3>PRECIPITATION</h3>
             <div style={{ display: "flex" }}>
                 <div className="precip-div">
                     <div>

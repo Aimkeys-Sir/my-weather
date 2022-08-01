@@ -1,5 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faDotCircle} from "@fortawesome/free-solid-svg-icons"
+import { useHistory } from "react-router-dom";
 
 export default function Temperature({ forecast }) {
   const dailyTemp = forecast.map((hour) => hour.temp_c);
@@ -75,9 +76,13 @@ export default function Temperature({ forecast }) {
       ""
     );
     return d
-  };
+  }
+  const history=useHistory()
+  function handleOnClick(){
+    history.push("/temperature")
+  }
   return (
-    <div className="col col-4">
+    <div onClick={handleOnClick} className="col col-4">
       <div>
         <h4 style={{margin:"7px"}}>TEMPERATURE</h4>
         <div className="day-text">

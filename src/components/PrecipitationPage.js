@@ -1,6 +1,7 @@
 import { faDroplet } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageHeaders from "./PageHeaders";
+import PrecipForecast from "./PrecipForecast";
 
 export default function PrecipitationPage({ data }) {
     const current = data.current
@@ -61,7 +62,11 @@ export default function PrecipitationPage({ data }) {
                             </tr>
                         </table>
                     </div>
-
+                    <div className="precip-content">
+                        <h3>Precipitation forecast</h3>
+                    <div className="bar-line"></div>
+                    <PrecipForecast hour={hour} forecast={data.forecast.forecastday[0].hour}/>
+                    </div>
                 </div>
             </div>
         </div>
