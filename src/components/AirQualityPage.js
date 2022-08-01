@@ -3,14 +3,15 @@ import Bars from "./Bars";
 import PageHeaders from "./PageHeaders";
  
 
-export default function AirQualityPage({ airQuality, defras, aqi,city,time,date }) {
+export default function AirQualityPage({ airQuality, defras, aqi,city,mainPollutant,date }) {
+
     return (
         <div className="aqi">
            <PageHeaders page={"AIR QUALITY"} city={city} date={date}/>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
                 <div className="p-index">
                     <h4>Pollution Index</h4>
-                    <Bars defras={defras} />
+                    <Bars defras={defras} mainPollutant={mainPollutant} />
                 </div>
                 <div>
                     <table className="polls">

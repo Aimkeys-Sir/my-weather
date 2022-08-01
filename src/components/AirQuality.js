@@ -4,13 +4,7 @@ import AqiSlider from "./AqiSlider"
 import { Link,NavLink, useHistory } from "react-router-dom"
 import { useCallback } from "react"
 
-export default function AirQuality({ airQuality,defras,aqi}) {
-    const mainPollutant = Object.keys(defras).reduce(((max, item) => {
-        let value = defras[item]
-        if (value > max.value) max = { ...max, pollutant: item, value: value }
-        return max
-    }), { pollutant: "", value: 0 })
-   
+export default function AirQuality({ airQuality,mainPollutant,aqi}) {
     const history=useHistory()
     const handleAqiClick=useCallback(()=>history.push("/aqi"))
 

@@ -8,7 +8,6 @@ export default function AutoCompleteItem({place,region,index,onAutoClick}) {
                 <h3>{place}</h3>
             <p><em>{region}</em></p> 
             </div>
-           
             {index<9?(<div className="auto-complete-line"></div>):null}
         </div>
     )

@@ -64,7 +64,6 @@ export default function PrecipitationPage({ data }) {
                     </div>
                     <div className="precip-content">
                         <h3>Precipitation forecast</h3>
-                    <div className="bar-line"></div>
                     <PrecipForecast hour={hour} forecast={data.forecast.forecastday[0].hour}/>
                     </div>
                 </div>

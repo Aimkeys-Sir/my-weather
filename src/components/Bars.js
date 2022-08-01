@@ -1,6 +1,8 @@
-export default function Bars({defras}){
+export default function Bars({defras,mainPollutant}){
+    const multiplier=mainPollutant.value<4?80:mainPollutant.value<8?50:80
     const bars=Object.keys(defras).map(poll=>{
-        const value=defras[poll]*80
+        console.log(mainPollutant);
+        const value=defras[poll]*multiplier
         console.log(value)
         return (<div style={{textAlign:"center"}}>
             <div className="bars" 
