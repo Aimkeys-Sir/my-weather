@@ -9,8 +9,7 @@ export default function PrecipitationPage({ data }) {
     const forecast = data.forecast.forecastday[0].hour[hour]
     const city = data.location.name
     const date = data.current.last_updated_epoch
-    let image = current.condition.code;
-    image += current.is_day === 0 ? ".night" : ".day";
+    let image ="wi-"+ current.condition.code +"-"+current.is_day;
 
     return (
         <div className="precip-page">
@@ -23,7 +22,8 @@ export default function PrecipitationPage({ data }) {
                             <h3 style={{marginLeft:"-15px"}}>Precipitation</h3>
                         </div>
                         <table>
-                            <tr>
+                            <tbody>
+                                 <tr>
                                 <td>Amount</td>
                                 <td>{current["precip_mm"]} mm</td>
                             </tr>
@@ -42,7 +42,9 @@ export default function PrecipitationPage({ data }) {
                             <tr>
                                 <td>Chances of Snow</td>
                                 <td>{forecast.chance_of_snow}%</td>
-                            </tr>
+                            </tr> 
+                            </tbody>
+                          
                         </table>
                     </div>
                     <div className="precip-content">
@@ -52,14 +54,17 @@ export default function PrecipitationPage({ data }) {
                             <h3>Clouds</h3>
                         </div>
                         <table id="clouds-table">
-                            <tr>
+                            <tbody>
+                               <tr>
                                 <td><strong>sky</strong></td>
                                 <td><em>{current.condition.text}</em></td>
                             </tr>
                             <tr>
                                 <td>coverage</td>
                                 <td><em>{current.cloud}%</em></td>
-                            </tr>
+                            </tr>  
+                            </tbody>
+                           
                         </table>
                     </div>
                     <div className="precip-content">

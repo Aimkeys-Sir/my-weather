@@ -5,8 +5,7 @@ export default function ForeCast({ forecastArr ,current}) {
 let hour=parseInt(current.last_updated.slice(current.last_updated.length-5).slice(0,2))
 hour=hour<18?hour:18
   const updFore = forecastArr.slice(hour, hour+7).map((item) => {
-    let image = item.condition.code;
-    image += item.is_day === 0 ? ".night" : ".day";
+    let image =`${item.condition.code}-${item.is_day}`;
     let time = item.time;
     time = time.substr(time.length - 5, time.length);
     return { image: image, time: time, temp: item.temp_c };
@@ -37,7 +36,6 @@ hour=hour<18?hour:18
           </div>
         </div>
       </div>
-      <tr id="my name is..." onClick={e=>console.log("me",e.target.name)} >click me</tr>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {updFore.map((item) => {
           return (

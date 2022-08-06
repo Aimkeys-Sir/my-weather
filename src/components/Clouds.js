@@ -1,8 +1,8 @@
 import { Link, useHistory } from "react-router-dom";
 
 export default function Clouds({ current, forecast }) {
-    let image = current.condition.code;
-    image += current.is_day === 0 ? ".night" : ".day";
+    let image = "wi-"+current.condition.code +"-"+current.is_day;
+    
     const hour = new Date().getHours()
     const history=useHistory()
     function handleClick(){
@@ -67,7 +67,7 @@ export default function Clouds({ current, forecast }) {
                             <img src="svg/wi-hot.svg" className="precip-images" />
                         </div>
                         <div>
-                            <h3>Sauna</h3>
+                            <h3>{}</h3>
                             <p>Feels like</p>
                         </div>
                     </div>

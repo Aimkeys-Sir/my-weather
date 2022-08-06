@@ -6,9 +6,9 @@ export default function ForecastPage({data}){
         <div className="fore-page">
             <PageHeaders page={"FORECAST"} city={data.location.name}/>
             <div>
-                <div>
+                <div style={{ margin:"auto 0 0 20px",display: "flex", flexWrap: "wrap" }}>
                     {data.forecast.forecastday[0].hour.map(fore=>(
-                        <ForecastItem />
+                        <ForecastItem time={fore.time} temp={fore.temp_c} image={`${fore.condition.code}-${fore.is_day}`}/>
                     ))}
                 </div>
             </div>

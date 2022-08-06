@@ -6,7 +6,7 @@ export default function AqiSlider({ defra }) {
                 <p>Hazardous</p>
             </div>
             <div className="color-range">
-                <input type="range" min="0" max="10" value={defra} className="slider" id="myRange" />
+                <input onChange={()=>""} type="range" min="0" max="10" value={defra} className="slider" id="myRange" />
                 <div className="one"></div>
                 <div className="two"></div>
                 <div className="three"></div>
