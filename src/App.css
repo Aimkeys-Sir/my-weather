@@ -50,7 +50,7 @@
   display: -ms-inline-grid;
   background: #3b0245;
   padding: 10px;
-  width: 410px;
+  width: 400px;
 }
 
 .col-7 {
@@ -59,11 +59,13 @@
 }
 
 .col-8 {
+  width: 350px;
   display: -ms-inline-grid;
   background: #302947;
 }
 
 .col-9 {
+  width: 400px;
   display: -ms-inline-grid;
   background: #331F68;
 }
@@ -146,20 +148,40 @@
 .city-text {
   display: flex;
 }
-
+.city-text em{
+  margin: 22px 2px 0;
+  font-size: 20px;
+  color: #d1cfcf;
+}
 .loc-dot {
   margin-top: 24px;
   margin-right: 10px;
   font-size: 20px;
+  font-weight: 800;
+}
+.fa-star{
+  margin: 24px 10px auto 10px ;
+  color: rgb(189, 186, 186);
+  font-size: 16px;
+}
+.clicked{
+  color: #3a5eee;
+}
+.list{
+  margin: 0 0 -10px 5px;
+  font-size: 16px;
+}
+.city-text h2{
+  margin: 20px auto 5px;
 }
 
 #update {
   text-align: center;
   justify-content: center;
-  padding: 5px 0;
+  padding: 0;
   border-radius: 10px;
-  background-color: #204598;
-  cursor: pointer;
+  font-weight: 900;
+  color: #d1cfcf;
 }
 
 #update p {
@@ -505,18 +527,6 @@ input[type="range"] {
   place-content: center;
 }
 
-/* .sunUv-div::after {
-  --p: 30;
-  background: conic-gradient(#4f3e448e calc(var(--p) * 1%), #0000 0);
-  position: absolute;
-  content: "";
-  width: 60px;
-  height: 60px;
-  left: 0;
-  border-radius: 50%;
-  transform: rotate(calc(calc(var(--p) / 100) * -1 * 360deg));
-} */
-
 .sunUv-div img {
   width: 55px;
   position: absolute;
@@ -687,10 +697,11 @@ p {
 .forecast-item {
   text-align: center;
   justify-content: center;
-  margin: 10px 4px 4px;
+  margin: 10px 5px 4px;
   background: #1b084e;
-  padding: 1px;
+  padding: 5px;
   border-radius: 4px;
+
 }
 
 .forecast-item h4 {
@@ -710,6 +721,7 @@ p {
 }
 
 .settings {
+  padding: 20px;
   color: white;
   transition: .4s;
   width: 90%;
@@ -737,7 +749,13 @@ p {
 .settings p {
   margin: 8px 0 0 8px;
 }
-
+.save{
+  background:#A308B8;
+}
+.save:hover{
+background: #2196F3;
+cursor: pointer;
+}
 .avatars img {
   /* padding: 10px 0 0 3px; */
   margin: 0 4px 0 0;
@@ -1000,4 +1018,5 @@ box-shadow:  5px 5px 10px #251a1e,
 .fore-page{
   color: white;
   height: 200vh;
+  padding: 30px;
 }
