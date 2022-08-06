@@ -23,16 +23,16 @@ hour=hour<18?hour:18
         <h3>FORECAST</h3>
         <div className="temp-images-div">
           <div className="sele">
-            <img src="svg/wi-thermometer-exterior.svg" />
+            <img alt="therm" src="svg/wi-thermometer-exterior.svg" />
           </div>
           <div className="sele">
-            <img
+            <img alt="umbrella"
               style={{ transform: "rotate(36deg)" }}
               src="svg/wi-umbrella.svg"
             />
           </div>
           <div className="sele">
-            <img src="svg/wi-time-1.svg"/>
+            <img alt="time" src="svg/wi-time-1.svg"/>
           </div>
         </div>
       </div>

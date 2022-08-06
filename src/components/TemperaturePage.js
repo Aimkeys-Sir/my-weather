@@ -1,8 +1,6 @@
 import PageHeaders from "./PageHeaders";
-import Temperature from "./Temperature";
 
 export default function TemperaturePage({ forecast, data,units }) {
-    const hour = new Date().getHours()
     const foreday = data.forecast.forecastday[0].day
     return (
         <div className="temp-page">

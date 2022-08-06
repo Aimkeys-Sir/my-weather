@@ -50,7 +50,7 @@ export default function PrecipitationPage({ data,units }) {
                     <div className="precip-content">
 
                         <div style={{display:"flex"}}>
-                            <img className="cloud-icon" src={`svg/${image}.svg`} />
+                            <img className="cloud-icon" alt="clouds" src={`svg/${image}.svg`} />
                             <h3>Clouds</h3>
                         </div>
                         <table id="clouds-table">

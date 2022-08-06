@@ -27,7 +27,7 @@ export default function Settings({ onToggleChange, userInfo, handleSave, favouri
 
                 })
         }
-    }, [])
+    }, [userInfo])
     useEffect(() => {
         onToggleChange({
             temp: togglesT ? "c" : "f",

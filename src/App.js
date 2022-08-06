@@ -108,7 +108,7 @@ function App() {
             .then(pat => { setFavs(cities); console.log("Cities patched:", pat) })
             .catch(console.log())
         }
-        else if (!add && existing == false) {
+        else if (!add && !existing) {
 
         }
         if (existing && add) {

@@ -70,22 +70,13 @@ function handleClick(){
           </div>
           <div style={{ display: "flex" }}>
             <div className="moon-img">
-              <img src="svg/wi-moon-alt-waning-crescent-2.svg" />
+              <img alt="moon" src="svg/wi-moon-alt-waning-crescent-2.svg" />
             </div>
             <div className="moon-text">
               <h4>{astro.moon_phase.split(" ")[0]} <br />{astro.moon_phase.split(" ")[1]}</h4>
               <p>Today</p>
             </div>
           </div>
-          {/* <div style={{ display: "flex" }}>
-          <div className="moon-img">
-            <img src="svg/wi-moon-new.svg" />
-          </div>
-          <div className="moon-text">
-            <h4>Moon Illumination</h4>
-            <p>14</p>
-          </div>
-        </div> */}
         </div>
       </div>
       <div></div>
