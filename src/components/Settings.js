@@ -1,41 +1,80 @@
-import { to } from "mathjs"
-import { useState } from "react"
+// import { to } from "mathjs"
+import { faStar } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useEffect, useState } from "react"
 // import Login from "./Login"
 
-export default function Settings({ alerts, setAlerts }) {
-    const [toggles, setToggles] = useState(true)
-    const [userInfo,setUserInfo]=useState({imageUrl:"svg/wi-alien.svg"})
 
-    function handleToggleChange(e) {
-        // console.log(`${e.target.name}:${e.target.value}`)
-        setToggles(toggles=>!toggles)
+export default function Settings({ userInfo, handleSave, favourites,alerts,onFavClick,onFavListClick }) {
+    const [togglesT, setTogglesT] = useState(true)
+    const [togglesW, setTogglesW] = useState(true)
+    const [togglesP, setTogglesP] = useState(true)
+    const [saved, setSaved] = useState(false)
+
+    useEffect(()=>{
+        if(userInfo.email){
+            fetch("https://weather-users-api.herokuapp.com/userdata")
+            .then(r=>r.json())
+            .then(entries=>{
+                console.log("entries",entries)
+                console.log(userInfo.email);
+                const myEntry=entries.find(entry=>entry.user===userInfo.email)
+                setTogglesP(myEntry.precip)
+                setTogglesT(myEntry.temp)
+                setTogglesW(myEntry.wind)
+            })
+        }
+    },[])
+    function handleTempChange(e) {
+        setTogglesT(toggles => !toggles)
+        setSaved(true)
+    }
+    function handleWindChange(e) {
+        setTogglesW(toggles => !toggles)
+        setSaved(true)
+    }
+    function handlePrecipChange(e) {
+        setTogglesP(toggles => !toggles)
+        setSaved(true)
+    }
+    function handleSaveClick() {
+        handleSave({ temp: togglesT, precip: togglesP, wind: togglesW })
+        setSaved(false)
     }
 
-    function handleOnSignIn(isSuccess,profile){
-      setUserInfo(userInfo=>({userInfo,...profile}))
-    }
-    function handleOnSignOut(isSuccess){
-
-    }
     return (
         <div className="settings">
             <div style={{ display: "flex" }}>
                 <div>
                     <div className="avatars">
-                        <img src={userInfo.imageUrl} />
+                        <img src={userInfo.picture ? userInfo.picture : "svg/wi-alien.svg"} />
                     </div>
-                   {userInfo.googleId? <p>{userInfo.name}</p>:null}
+                    {userInfo.name ? <p>{userInfo.name}</p> : null}
                 </div>
-                {/* <Login onSignIn={handleOnSignIn} onSignOut={handleOnSignOut}/> */}
+
             </div>
-            <h2>Preferences</h2>
+          { favourites.length>0? <div>
+                <h2>Favourites</h2>
+                <ul style={{margin:"5px 5px 20px"}}>
+                    {favourites.map(fav => {
+                        return <li key={fav}>
+                            <div style={{display:"flex",alignItems:"center",cursor:"pointer"}}>
+                                <p onClick={()=>onFavListClick(fav)}>{fav}</p>
+                                <FontAwesomeIcon onClick={()=>onFavClick(fav,true,false)} className="clicked list" icon={faStar} />
+                            </div>
+                        </li>
+                    })}
+                </ul>
+                <div className="settings-line"></div>
+            </div>:null}
+            <h2 style={{margin:"20px 5px 5px"}}>Preferences</h2>
             <h3>Temperature</h3>
             <div style={{ display: "flex" }}>
-                <p>{toggles ?"Celcius"  :"Fahrenheit" }</p>
-                <div onClick={handleToggleChange}>
+                <p>{togglesT ? "Celcius" : "Fahrenheit"}</p>
+                <div >
                     <label className="toggle-switch">
-                        <input  onChange={handleToggleChange} value={toggles} id="temp-toggle" type="checkbox" />
-                        <span name="temp" onClick={handleToggleChange} className="slider-round"></span>
+                        <input onChange={handleTempChange} value={togglesT} id="temp-toggle" type="checkbox" />
+                        <span name="temp" className="slider-round"></span>
                     </label>
                 </div>
 
@@ -43,10 +82,10 @@ export default function Settings({ alerts, setAlerts }) {
             <div className="settings-line"></div>
             <h3>Precipitation</h3>
             <div style={{ display: "flex" }}>
-                <p>{toggles ? "inches" : "mm"}</p>
+                <p>{togglesP ? "mm" : "inches"}</p>
                 <div>
                     <label className="toggle-switch">
-                        <input name="precip" value={toggles} onChange={handleToggleChange} id="temp-toggle" type="checkbox" />
+                        <input name="precip" value={togglesP} onChange={handlePrecipChange} id="temp-toggle" type="checkbox" />
                         <span className="slider-round"></span>
                     </label>
                 </div>
@@ -55,26 +94,25 @@ export default function Settings({ alerts, setAlerts }) {
             <div className="settings-line"></div>
             <h3>Wind</h3>
             <div style={{ display: "flex" }}>
-                <p>{toggles ? "mph" : "km/h"}</p>
+                <p>{togglesW ? "km/h" : "mph"}</p>
                 <div>
                     <label className="toggle-switch">
-                        <input name="wind" value={toggles} onChange={handleToggleChange} id="temp-toggle" type="checkbox" />
+                        <input name="wind" value={togglesW} onChange={handleWindChange} id="temp-toggle" type="checkbox" />
                         <span className="slider-round"></span>
                     </label>
                 </div>
             </div>
-            <div style={{ display: "flex" }}>
-                <h3>Alerts</h3>
-                <select>
-                    <option>Pollution</option>
-                    <option>Floods</option>
-                    <option>Rain</option>
-                    <option>Snow</option>
-                    <option>Tsunami</option>
-                    <option>High Uv</option>
-                </select>
+            <div style={{display:"flex"}}>
+                {userInfo.email && saved ? <div onClick={handleSaveClick}
+                className="save" style={{ padding: "1px 0 12px", width: "160px", height: "30px", alignItems: "center", textAlign: "center" }}>
+                <h3>Save</h3>
+            </div> : null}
+            {alerts?<div style={{display:"flex"}}>
+                <h3 style={{color:"#dedede"}}>saved!</h3>
+                <img alt="alert" src="checkmark.png" style={{filter:"invert(10)",width:"35px",height:"35px"}}/>
+            </div>:null}
             </div>
-
+            
         </div>
     )
 }
