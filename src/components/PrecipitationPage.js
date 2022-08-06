@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageHeaders from "./PageHeaders";
 import PrecipForecast from "./PrecipForecast";
 
-export default function PrecipitationPage({ data }) {
+export default function PrecipitationPage({ data,units }) {
     const current = data.current
     const hour = new Date().getHours()
     const forecast = data.forecast.forecastday[0].hour[hour]
@@ -25,7 +25,7 @@ export default function PrecipitationPage({ data }) {
                             <tbody>
                                  <tr>
                                 <td>Amount</td>
-                                <td>{current["precip_mm"]} mm</td>
+                                <td>{current[`precip_${units.precip}`]} {units.precip}</td>
                             </tr>
                             <tr>
                                 <td>Humidity</td>
@@ -33,7 +33,7 @@ export default function PrecipitationPage({ data }) {
                             </tr>
                             <tr>
                                 <td>Dew Point</td>
-                                <td>{forecast["dewpoint_c"]}&deg;</td>
+                                <td>{forecast[`dewpoint_${units.temp}`]}&deg; {units.temp.toUpperCase()}</td>
                             </tr>
                             <tr>
                                 <td>Chances of Rain</td>
@@ -69,7 +69,7 @@ export default function PrecipitationPage({ data }) {
                     </div>
                     <div className="precip-content">
                         <h3>Precipitation forecast</h3>
-                    <PrecipForecast hour={hour} forecast={data.forecast.forecastday[0].hour}/>
+                    <PrecipForecast units={units} hour={hour} forecast={data.forecast.forecastday[0].hour}/>
                     </div>
                 </div>
             </div>

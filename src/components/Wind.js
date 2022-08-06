@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom"
 
-export default function Wind({current,forecast,wind}){
+export default function Wind({current,forecast,wind,units}){
    const hour=new Date().getHours()
    const history=useHistory()
    function handleClick(){
@@ -15,10 +15,10 @@ export default function Wind({current,forecast,wind}){
                 </div>
                 <div className="wind-text">
                     <div style={{display:"flex"}}>
-                        <h1>{current.wind_kph}</h1>
-                        <h4>km/h</h4>
+                        <h1>{current[`wind_${units.wind}`]}</h1>
+                        <h4>{units.wind}</h4>
                     </div>
-                    <p>Gusts {current.gust_kph} km/h</p>
+                    <p>Gusts {current[`gust_${units.wind}`]}{units.wind}</p>
                 </div>
             </div>
             <div style={{display:"flex"}}>
@@ -34,7 +34,7 @@ export default function Wind({current,forecast,wind}){
                 </div>
                 <div className="wind-dir-text">
                     <h4>Wind chill</h4>
-                    <p>{forecast[hour].windchill_c}&deg;</p>
+                    <p>{forecast[hour][`windchill_${units.temp}`]}&deg; {units.temp.toUpperCase()}</p>
                 </div>
                 
             </div>

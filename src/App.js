@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFaceGrin, faMaskFace, faFaceSadTear, faFaceGrinTears } from "@fortawesome/free-solid-svg-icons"
 
 import "./App.css";
@@ -21,7 +20,6 @@ import ForecastPage from "./components/ForecastPage";
 import GoogleOneTapLogin from "react-google-one-tap-login"
 
 
-
 function App() {
   const [place, setPlace] = useState("Nairobi")
   const [data, setData] = useState({})
@@ -29,7 +27,8 @@ function App() {
   const [isLogged, setIslogged] = useState(false)
   const [userInfo, setUserInfo] = useState({})
   const [favs, setFavs] = useState([])
-  const [alerts,setAlerts]=useState("")
+  const [alerts, setAlerts] = useState("")
+  const [units,setUnits]=useState({temp:"c",wind:"kph",precip:"mm"})
 
 
   let airQuality
@@ -55,11 +54,11 @@ function App() {
     setIslogged(true)
     setUserInfo(user)
     fetch("https://weather-users-api.herokuapp.com/userdata")
-    .then(r=>r.json())
-    .then(entries=>{
-      let favscities=entries.find(entry=>entry.user===user.email)
-      if(favscities) setFavs(favscities.favourites)  
-    })
+      .then(r => r.json())
+      .then(entries => {
+        let favscities = entries.find(entry => entry.user === user.email)
+        if (favscities) setFavs(favscities.favourites)
+      })
   }
 
   useEffect(() => {
@@ -68,7 +67,9 @@ function App() {
       .then(setData)
       .catch(console.log)
   }, [place])
-
+  function handleUnitsChange(changedUnits){
+    setUnits(changedUnits)
+  }
 
   function handleOnAutoClick(place) {
     setPlace(place)
@@ -77,83 +78,83 @@ function App() {
     setShowSideBar(show => !show)
   }
 
-useEffect(()=>{
-  setTimeout(()=>{
-    setAlerts("")
-  },2500)
-},[alerts])
+  useEffect(() => {
+    setTimeout(() => {
+      setAlerts("")
+    }, 2500)
+  }, [alerts])
 
-  function handleSave(newData,isCity=false,add=true) {
-    console.log(newData,isCity,add)
+  function handleSave(newData, isCity = false, add = true) {
+    console.log(newData, isCity, add)
     fetch("https://weather-users-api.herokuapp.com/userdata")
       .then(r => r.json())
       .then(data => {
         let existing = data.find(entry => entry.user === userInfo.email)
-        let cities=existing?existing.favourites:[]
-        if(cities.find(city=>city===newData)&& add) return
-        if(!add && Boolean(existing)){
-          cities=cities.filter(city=>city!==newData)
-          const serverOptions={
-            method:"PATCH",
-            headers:{
-              "Content-Type":"application/json"
+        let cities = existing ? existing.favourites : []
+        if (cities.find(city => city === newData) && add) return
+        if (!add && Boolean(existing)) {
+          cities = cities.filter(city => city !== newData)
+          const serverOptions = {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json"
             },
-            body:JSON.stringify({
-              favourites:[...cities]
+            body: JSON.stringify({
+              favourites: [...cities]
             })
           }
-          fetch(`https://weather-users-api.herokuapp.com/userdata/${existing.id}`,serverOptions)
-          .then(r=>r.json())
-          .then(pat=>{setFavs(cities);console.log("Cities patched:",pat)})
-          .catch(console.log())
+          fetch(`https://weather-users-api.herokuapp.com/userdata/${existing.id}`, serverOptions)
+            .then(r => r.json())
+            .then(pat => { setFavs(cities); console.log("Cities patched:", pat) })
+            .catch(console.log())
         }
-        else if(!add && existing==false){
+        else if (!add && existing == false) {
 
         }
         if (existing && add) {
-          const serverOptions =!isCity? {
+          const serverOptions = !isCity ? {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              temp:newData.temp,wind:newData.wind,precip:newData.precip
+              temp: newData.temp, wind: newData.wind, precip: newData.precip
             })
-          }:
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              favourites:[...cities,newData]
-            })}
+          } :
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                favourites: [...cities, newData]
+              })
+            }
           fetch(`https://weather-users-api.herokuapp.com/userdata/${existing.id}`, serverOptions)
             .then(r => r.json())
-            .then(r =>{ isCity?setFavs(favs=>[...favs,newData]):setAlerts("saved successfully!");console.log("patched", r)})
+            .then(r => { isCity ? setFavs(favs => [...favs, newData]) : setAlerts("saved successfully!"); console.log("patched", r) })
         }
-        else if(!existing && add) {
-          const serverOptions = !isCity?{
+        else if (!existing && add) {
+          const serverOptions = !isCity ? {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({ user: userInfo.email, ...newData,favourites:[]})
-          }:
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ user: userInfo.email, favourites:[newData]})
-          }
+            body: JSON.stringify({ user: userInfo.email, ...newData, favourites: [] })
+          } :
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ user: userInfo.email, favourites: [newData] })
+            }
           fetch("https://weather-users-api.herokuapp.com/userdata", serverOptions)
             .then(r => r.json())
-            .then(r => {isCity?setFavs(favs=>[...favs,newData]):setAlerts("Saved succesifully!");console.log("Posted", r)})
+            .then(r => { isCity ? setFavs(favs => [...favs, newData]) : setAlerts("Saved succesifully!"); console.log("Posted", r) })
         }
       })
   }
-
 
   function formatAirQ(defra) {
     let aqi = {}
@@ -194,43 +195,44 @@ useEffect(()=>{
     <BrowserRouter>
       <Switch>
         <Route path="/temperature">
-          {data.forecast ? <TemperaturePage data={data} forecast={data.forecast.forecastday[0].hour} /> : null}
+          {data.forecast ? <TemperaturePage units={units} data={data} forecast={data.forecast.forecastday[0].hour} /> : null}
         </Route>
         <Route exact path="/aqi">
           {airQuality ? <AirQualityPage mainPollutant={mainPollutant} city={data.location.name} date={data.current.last_updated_epoch} defras={defras} airQuality={airQuality} aqi={formatAirQ(airQuality['gb-defra-index'])} /> : null}
         </Route>
         <Route path="/precipitation">
-          {data.current ? <PrecipitationPage data={data} /> : null}
+          {data.current ? <PrecipitationPage units={units} data={data} /> : null}
         </Route>
         <Route path={"/wind"}>
-          {data.current ? <WindPage wind={windM} data={data} /> : null}
+          {data.current ? <WindPage units={units} wind={windM} data={data} /> : null}
         </Route>
         <Route path={"/astro"}>
           {data.current ? <SunMoonPage data={data} /> : null}
         </Route>
         <Route path={"/forecasts"}>
-          {data.forecast ? <ForecastPage data={data} /> : null}
+          {data.forecast ? <ForecastPage units={units} data={data} /> : null}
         </Route>
         <Route exact path="/">
           <div style={{ display: "flex" }}>
             {!isLogged ? <GoogleOneTapLogin onSuccess={onLoggedSuccess}
-              onError={() => console.log("Failed")}
+              onError={() => alert(" Login Failed! /n Please refresh the page. ")}
               googleAccountConfigs={{ client_id: "399114662979-8akjgk6e9fmmp1041doa7a8j9kvim6pv.apps.googleusercontent.com" }} /> : null}
-            {showSideBar ? <Settings onFavListClick={handleOnAutoClick}  onFavClick={handleSave} alerts={alerts} favourites={favs} handleSave={handleSave} userInfo={userInfo} /> : null}
+            {showSideBar ? <Settings onToggleChange={handleUnitsChange} onFavListClick={handleOnAutoClick} onFavClick={handleSave} alerts={alerts} favourites={favs} handleSave={handleSave} userInfo={userInfo} /> : null}
             <div>
               <div>
                 {data.location ? <NavBar favourites={favs} onFavClick={handleSave} data={data} onHamClick={handleOnHamClick} showSideBar={showSideBar} location={data.location} onAutoClick={handleOnAutoClick} /> : null}
                 {data.forecast ? (
                   <div className="App">
                     <Clouds
+                    units={units}
                       forecast={data.forecast.forecastday}
                       current={data.current}
                     />
                     <AirQuality airQuality={data.current.air_quality} mainPollutant={mainPollutant} aqi={formatAirQ(airQuality['gb-defra-index'])} />
-                    <Temperature forecast={data.forecast.forecastday[0].hour} />
-                    <Wind wind={windM} current={data.current} forecast={data.forecast.forecastday[0].hour} />
+                    <Temperature units={units} forecast={data.forecast.forecastday[0].hour} />
+                    <Wind units={units} wind={windM} current={data.current} forecast={data.forecast.forecastday[0].hour} />
                     <SunMoon data={data} />
-                    <ForeCast current={data.current} forecastArr={data.forecast.forecastday[0].hour} />
+                    <ForeCast units={units} current={data.current} forecastArr={data.forecast.forecastday[0].hour} />
                   </div>
                 ) : null}
               </div>

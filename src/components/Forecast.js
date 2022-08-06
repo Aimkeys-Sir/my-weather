@@ -1,14 +1,14 @@
 import { useHistory } from "react-router-dom";
 import ForecastItem from "./ForecastItem";
 
-export default function ForeCast({ forecastArr ,current}) {
+export default function ForeCast({ forecastArr ,current,units}) {
 let hour=parseInt(current.last_updated.slice(current.last_updated.length-5).slice(0,2))
 hour=hour<18?hour:18
   const updFore = forecastArr.slice(hour, hour+7).map((item) => {
     let image =`${item.condition.code}-${item.is_day}`;
     let time = item.time;
     time = time.substr(time.length - 5, time.length);
-    return { image: image, time: time, temp: item.temp_c };
+    return { image: image, time: time, temp: item[`temp_${units.temp}`] };
   });
   const history=useHistory()
   function handleClick(){

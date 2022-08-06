@@ -1,8 +1,10 @@
 import { Link, useHistory } from "react-router-dom";
 
-export default function Clouds({ current, forecast }) {
+
+export default function Clouds({ current, forecast,units }) {
     let image = "wi-"+current.condition.code +"-"+current.is_day;
-    
+
+
     const hour = new Date().getHours()
     const history=useHistory()
     function handleClick(){
@@ -17,8 +19,8 @@ export default function Clouds({ current, forecast }) {
                     <div>
                         <img className="precip-icon" src="svg/wi-raindrop.svg" />
                     </div>
-                    <h1>{current["precip_mm"]}</h1>
-                    <h3 style={{ marginTop: "45px", marginLeft: "-2px" }}>mm</h3>
+                    <h1>{current[`precip_${units.precip}`]}</h1>
+                    <h3 style={{ marginTop: "45px", marginLeft: "-2px" }}>{units.precip}</h3>
                 </div>
                 <div className="precip-cloud-div">
                     <div>
@@ -47,7 +49,7 @@ export default function Clouds({ current, forecast }) {
                             <img src="svg/wi-raindrop.svg" className="precip-images" />
                         </div>
                         <div>
-                            <h3>{forecast[0].hour[hour]["dewpoint_c"]}&deg;</h3>
+                            <h3>{forecast[0].hour[hour][`dewpoint_${units.temp}`]}&deg; {units.temp.toUpperCase()}</h3>
                             <p>Dew Point</p>
                         </div>
                     </div>
@@ -67,7 +69,7 @@ export default function Clouds({ current, forecast }) {
                             <img src="svg/wi-hot.svg" className="precip-images" />
                         </div>
                         <div>
-                            <h3>{}</h3>
+                            <h3>{current[`feelslike_${units.temp}`]}&deg; {units.temp.toUpperCase()}</h3>
                             <p>Feels like</p>
                         </div>
                     </div>

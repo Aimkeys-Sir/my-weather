@@ -1,7 +1,7 @@
 import PageHeaders from "./PageHeaders";
 import Temperature from "./Temperature";
 
-export default function TemperaturePage({ forecast, data }) {
+export default function TemperaturePage({ forecast, data,units }) {
     const hour = new Date().getHours()
     const foreday = data.forecast.forecastday[0].day
     return (
@@ -9,20 +9,20 @@ export default function TemperaturePage({ forecast, data }) {
             <PageHeaders page={"TEMPERATURE"} city={data.location.name} />
             <div style={{ display: "flex" }}>
                 <div className="temp-graph">
-                    <h1 style={{ fontSize: "48px", margin: "20px" }}>{data.current.temp_c}&deg;</h1>
+                    <h1 style={{ fontSize: "48px", margin: "20px" }}>{data.current[`temp_${units.temp}`]}&deg; {units.temp.toUpperCase()}</h1>
                     <table>
                         <tbody>
                             <tr>
                                 <td>Today's Average</td>
-                                <td>{foreday.avgtemp_c}&deg;</td>
+                                <td>{foreday[`avgtemp_${units.temp}`]}&deg; {units.temp.toUpperCase()}</td>
                             </tr>
                             <tr>
                                 <td>Maximum</td>
-                                <td>{foreday.maxtemp_c}&deg;</td>
+                                <td>{foreday[`maxtemp_${units.temp}`]}&deg; {units.temp.toUpperCase()}</td>
                             </tr>
                             <tr>
                                 <td>Minimum</td>
-                                <td>{foreday.mintemp_c}&deg;</td>
+                                <td>{foreday[`mintemp_${units.temp}`]}&deg; {units.temp.toUpperCase()}</td>
                             </tr>
                         </tbody>
 
@@ -41,7 +41,7 @@ export default function TemperaturePage({ forecast, data }) {
                                         margin: "2px"
                                     }}>
                                     </div>
-                                    {<p style={{ margin: "2px 0 4px", fontSize: "10px" }}>{fore.temp_c}</p>}
+                                    {<p style={{ margin: "2px 0 4px", fontSize: "10px" }}>{fore[`temp_${units.temp}`]}</p>}
                                     <div className="bar-line-h2"></div>
                                     {<p style={{ margin: "2px 0 4px", fontSize: "10px" }}>{index}</p>}
                                 </div>

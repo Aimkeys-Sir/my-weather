@@ -2,7 +2,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faDotCircle} from "@fortawesome/free-solid-svg-icons"
 import { useHistory } from "react-router-dom";
 
-export default function Temperature({ forecast }) {
+export default function Temperature({ forecast,units }) {
   const dailyTemp = forecast.map((hour) => hour.temp_c);
   const temp_base = dailyTemp[0];
   const pointsArray = dailyTemp.map((temp, index) => [
@@ -124,23 +124,12 @@ export default function Temperature({ forecast }) {
             <FontAwesomeIcon className="temp-dot dot5" style={{top:`${105+(temp_base-dailyTemp[22])*5}px`, left:`${14.4*22}px`}} icon={faDotCircle}/>
         </div>
         <div className="temp-forecasts">
-            <p style={{top:`${140+(temp_base-dailyTemp[3])*7}px`, left:`${14*3}px`}}>{dailyTemp[3]}&deg;</p>
-            <p style={{top:`${140+(temp_base-dailyTemp[8])*7}px`, left:`${14*8}px`}}>{dailyTemp[8]}&deg;</p>
-            <p style={{top:`${130+(temp_base-dailyTemp[13])*7}px`, left:`${14*13}px`}}>{dailyTemp[13]}&deg;</p>
-            <p style={{top:`${120+(temp_base-dailyTemp[19])*7}px`, left:`${14*19}px`}}>{dailyTemp[19]}&deg;</p>
-            <p style={{top:`${120+(temp_base-dailyTemp[22])*7}px`, left:`${14*22}px`}}>{dailyTemp[22]}&deg;</p>
+            <p style={{top:`${140+(temp_base-dailyTemp[3])*7}px`, left:`${14*3}px`}}>{forecast[3][`temp_${units.temp}`]}&deg; {units.temp.toUpperCase()}</p>
+            <p style={{top:`${140+(temp_base-dailyTemp[8])*7}px`, left:`${14*8}px`}}>{forecast[8][`temp_${units.temp}`]}&deg; {units.temp.toUpperCase()}</p>
+            <p style={{top:`${130+(temp_base-dailyTemp[13])*7}px`, left:`${14*13}px`}}>{forecast[13][`temp_${units.temp}`]}&deg; {units.temp.toUpperCase()}</p>
+            <p style={{top:`${120+(temp_base-dailyTemp[19])*7}px`, left:`${14*19}px`}}>{forecast[19][`temp_${units.temp}`]}&deg; {units.temp.toUpperCase()}</p>
+            <p style={{top:`${120+(temp_base-dailyTemp[22])*7}px`, left:`${14*22}px`}}>{forecast[22][`temp_${units.temp}`]}&deg;{units.temp.toUpperCase()}</p>
         </div>
-        {/* <div className="temp-images-div"> 
-                 <div className="temp-switch">
-                    <img src="svg/wi-thermometer-exterior.svg"/>
-               </div>
-               <div className="temp-switch">
-                    <img style={{transform:"rotate(36deg)"}} src="svg/wi-umbrella.svg"/>
-               </div>
-               <div className="sele">
-                    <img src="svg/wi-thermometer-exterior.svg"/>
-               </div>
-        </div> */}
       </div>
     </div>
   );

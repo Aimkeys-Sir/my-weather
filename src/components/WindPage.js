@@ -2,7 +2,7 @@ import { faWind } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageHeaders from "./PageHeaders";
 
-export default function WindPage({ data,wind }) {
+export default function WindPage({ data,wind,units }) {
     const hour = new Date().getHours()
     const h = hour < 18 ? hour : 18
     const daily=data.forecast.forecastday[0].day
@@ -14,16 +14,16 @@ export default function WindPage({ data,wind }) {
                     <div className="wind-content">
                         <div style={{ display: "flex" }}>
                             <FontAwesomeIcon style={{ fontSize: "36px", color: "#fd8efd", margin: "0 0 0 20px" }} icon={faWind} />
-                            <h3>{data.current.wind_kph} km/h</h3>
+                            <h3>{data.current[`wind_${units.wind}`]}{units.wind}</h3>
                         </div>
                         <table>
                             <tr>
                                 <td>Speed</td>
-                                <td>{data.current.wind_kph} km/h</td>
+                                <td>{data.current[`wind_${units.wind}`]}{units.wind}</td>
                             </tr>
                             <tr>
                                 <td>Gusts</td>
-                                <td>{data.current.gust_kph} km/h</td>
+                                <td>{data.current[`gust_${units.wind}`]}{units.wind}</td>
                             </tr>
                             <tr>
                                 <td>Direction</td>
@@ -31,7 +31,7 @@ export default function WindPage({ data,wind }) {
                             </tr>
                             <tr>
                                 <td>Chill</td>
-                                <td>{data.forecast.forecastday[0].hour[hour].windchill_c}&deg;</td>
+                                <td>{data.forecast.forecastday[0].hour[hour][`windchill_${units.temp}`]}&deg; {units.temp.toUpperCase()}</td>
                             </tr>
                         </table>
                     </div>
@@ -48,7 +48,7 @@ export default function WindPage({ data,wind }) {
                                 <div>
                                     <div className="wind-bar" style={{ width: "35px", height: `${height}px`, margin: "2px" }}>
                                     </div>
-                                    <p style={{margin:"auto"}}>{fore.wind_kph}km/h</p>
+                                    <p style={{margin:"auto"}}>{fore[`wind_${units.wind}`]}{units.wind}</p>
                                     <div style={{width:"70px"}} className="bar-line-h"></div>
                                     <p style={{margin:"auto 0"}}>{fore.time.slice(fore.time.length-5)}</p>
                                 </div>
@@ -63,7 +63,7 @@ export default function WindPage({ data,wind }) {
                     <table>
                         <tr style={{textAlign:"left"}}>
                             <td style={{border:"none",fontSize:"20px"}}>Max</td>
-                            <td style={{border:"none"}}>{daily.maxwind_kph} km/h</td>
+                            <td style={{border:"none"}}>{daily[`maxwind_${units.wind}`]}{units.wind}</td>
                         </tr>
                     </table>
                     </div>

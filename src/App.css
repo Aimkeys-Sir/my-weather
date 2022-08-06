@@ -775,8 +775,8 @@ cursor: pointer;
 
 #temp-toggle {
   opacity: 0;
-  width: 0;
-  height: 0;
+  width: 30px;
+  height: 30px;
 }
 
 .toggle-switch {
@@ -795,8 +795,9 @@ cursor: pointer;
   right: 0;
   bottom: 0;
   background-color: #a308b8;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: .1s;
+  -moz-transition: .1s;
+  transition: .1s;
   border-radius: 15px;
 }
 
