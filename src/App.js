@@ -8,23 +8,30 @@ import Clouds from "./components/Clouds";
 import AirQuality from "./components/AirQuality";
 import ForeCast from "./components/Forecast";
 import SunMoon from "./components/SunMoon";
-import Visibility from "./components/Visibility";
 import Temperature from "./components/Temperature";
 import Wind from "./components/Wind";
 import Settings from "./components/Settings";
 import AirQualityPage from "./components/AirQualityPage";
 import PrecipitationPage from "./components/PrecipitationPage";
 import TemperaturePage from "./components/TemperaturePage";
-import { Router, Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import WindPage from "./components/WindPage";
 import SunMoonPage from "./components/SunMoonPage";
 import ForecastPage from "./components/ForecastPage";
+import GoogleOneTapLogin from "react-google-one-tap-login"
+
+
 
 function App() {
-  const [alerts, setAlerts] = useState()
   const [place, setPlace] = useState("Nairobi")
   const [data, setData] = useState({})
   const [showSideBar, setShowSideBar] = useState(false)
+  const [isLogged, setIslogged] = useState(false)
+  const [userInfo, setUserInfo] = useState({})
+  const [favs, setFavs] = useState([])
+  const [alerts,setAlerts]=useState("")
+
+
   let airQuality
   let defras
   let mainPollutant
@@ -44,18 +51,24 @@ function App() {
     }), { pollutant: "", value: 0 })
   }
 
+  function onLoggedSuccess(user) {
+    setIslogged(true)
+    setUserInfo(user)
+    fetch("https://weather-users-api.herokuapp.com/userdata")
+    .then(r=>r.json())
+    .then(entries=>{
+      let favscities=entries.find(entry=>entry.user===user.email)
+      if(favscities) setFavs(favscities.favourites)  
+    })
+  }
 
   useEffect(() => {
     fetch(`http://api.weatherapi.com/v1/forecast.json?key=b4bb0f58f9a64179ac1103527221807&q=${place}&aqi=yes`)
       .then((res) => res.json())
       .then(setData)
       .catch(console.log)
-    // fetch("http://localhost:9003/userdata")
-    //   .then((r) => r.json())
-    //   .then(console.log)
   }, [place])
-  console.log(data)
-  //let time = data.forecast ? data.current.last_updated_epoch : "";
+
 
   function handleOnAutoClick(place) {
     setPlace(place)
@@ -63,6 +76,85 @@ function App() {
   function handleOnHamClick() {
     setShowSideBar(show => !show)
   }
+
+useEffect(()=>{
+  setTimeout(()=>{
+    setAlerts("")
+  },2500)
+},[alerts])
+
+  function handleSave(newData,isCity=false,add=true) {
+    console.log(newData,isCity,add)
+    fetch("https://weather-users-api.herokuapp.com/userdata")
+      .then(r => r.json())
+      .then(data => {
+        let existing = data.find(entry => entry.user === userInfo.email)
+        let cities=existing?existing.favourites:[]
+        if(cities.find(city=>city===newData)&& add) return
+        if(!add && Boolean(existing)){
+          cities=cities.filter(city=>city!==newData)
+          const serverOptions={
+            method:"PATCH",
+            headers:{
+              "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+              favourites:[...cities]
+            })
+          }
+          fetch(`https://weather-users-api.herokuapp.com/userdata/${existing.id}`,serverOptions)
+          .then(r=>r.json())
+          .then(pat=>{setFavs(cities);console.log("Cities patched:",pat)})
+          .catch(console.log())
+        }
+        else if(!add && existing==false){
+
+        }
+        if (existing && add) {
+          const serverOptions =!isCity? {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              temp:newData.temp,wind:newData.wind,precip:newData.precip
+            })
+          }:
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              favourites:[...cities,newData]
+            })}
+          fetch(`https://weather-users-api.herokuapp.com/userdata/${existing.id}`, serverOptions)
+            .then(r => r.json())
+            .then(r =>{ isCity?setFavs(favs=>[...favs,newData]):setAlerts("saved successfully!");console.log("patched", r)})
+        }
+        else if(!existing && add) {
+          const serverOptions = !isCity?{
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user: userInfo.email, ...newData,favourites:[]})
+          }:
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user: userInfo.email, favourites:[newData]})
+          }
+          fetch("https://weather-users-api.herokuapp.com/userdata", serverOptions)
+            .then(r => r.json())
+            .then(r => {isCity?setFavs(favs=>[...favs,newData]):setAlerts("Saved succesifully!");console.log("Posted", r)})
+        }
+      })
+  }
+
+
   function formatAirQ(defra) {
     let aqi = {}
     if (defra < 2) {
@@ -83,19 +175,19 @@ function App() {
   let windM = { summary: "", message: "" }
   if (data.current) {
     wind = data.current.wind_mph
-    windM=wind<1?{...windM,summary:"calm",message:"smoke rises vertically"}
-    :wind<3?{...windM,summary:"Light air",message:"Smoke drifts with air, weather vanes inactive"}
-    :wind<7?{...windM,summary:"Light breeze",message:"Weather vanes active, wind felt on face, leaves rustle"}
-    :wind<12?{...windM,summary:"Gentle breeze",message:"Leaves & small twigs move, light flags extend"}
-    :wind<18?{...windM,summary:"Moderate breeze",message:"Small branches sway, dust & loose paper blows about"}
-    :wind<24?{...windM,summary:"Fresh breeze",message:"Small trees sway, waves break on inland waters"}
-    :wind<31?{...windM,summary:"Strong breeze",message:"Large branches sway, umbrellas difficult to use"}
-    :wind<38?{...windM,summary:"Moderate gale",message:"Whole trees sway, difficult to walk against wind"}
-    :wind<46?{...windM,summary:"Fresh gale",message:"Twigs broken off trees, walking against wind very difficult"}
-    :wind<54?{...windM,summary:"Strong gale",message:"Slight damage to buildings, shingles blown off roof"}
-    :wind<63?{...windM,summary:"Whole gale",message:"Trees uprooted, considerable damage to buildings"}
-    :wind<73?{...windM,summary:"Storm",message:"Widespread damage, very rare occurrence"}
-    :{...windM,summary:"Hurricane",message:"Violent destruction"}
+    windM = wind < 1 ? { ...windM, summary: "calm", message: "smoke rises vertically" }
+      : wind < 3 ? { ...windM, summary: "Light air", message: "Smoke drifts with air, weather vanes inactive" }
+        : wind < 7 ? { ...windM, summary: "Light breeze", message: "Weather vanes active, wind felt on face, leaves rustle" }
+          : wind < 12 ? { ...windM, summary: "Gentle breeze", message: "Leaves & small twigs move, light flags extend" }
+            : wind < 18 ? { ...windM, summary: "Moderate breeze", message: "Small branches sway, dust & loose paper blows about" }
+              : wind < 24 ? { ...windM, summary: "Fresh breeze", message: "Small trees sway, waves break on inland waters" }
+                : wind < 31 ? { ...windM, summary: "Strong breeze", message: "Large branches sway, umbrellas difficult to use" }
+                  : wind < 38 ? { ...windM, summary: "Moderate gale", message: "Whole trees sway, difficult to walk against wind" }
+                    : wind < 46 ? { ...windM, summary: "Fresh gale", message: "Twigs broken off trees, walking against wind very difficult" }
+                      : wind < 54 ? { ...windM, summary: "Strong gale", message: "Slight damage to buildings, shingles blown off roof" }
+                        : wind < 63 ? { ...windM, summary: "Whole gale", message: "Trees uprooted, considerable damage to buildings" }
+                          : wind < 73 ? { ...windM, summary: "Storm", message: "Widespread damage, very rare occurrence" }
+                            : { ...windM, summary: "Hurricane", message: "Violent destruction" }
   }
 
   return (
@@ -114,17 +206,20 @@ function App() {
           {data.current ? <WindPage wind={windM} data={data} /> : null}
         </Route>
         <Route path={"/astro"}>
-          {data.current?<SunMoonPage  data={data}/>:null}
+          {data.current ? <SunMoonPage data={data} /> : null}
         </Route>
         <Route path={"/forecasts"}>
-          {data.forecast?<ForecastPage data={data}/>:null}
+          {data.forecast ? <ForecastPage data={data} /> : null}
         </Route>
         <Route exact path="/">
           <div style={{ display: "flex" }}>
-            {showSideBar ? <Settings alerts={alerts} setAlerts={setAlerts} /> : null}
+            {!isLogged ? <GoogleOneTapLogin onSuccess={onLoggedSuccess}
+              onError={() => console.log("Failed")}
+              googleAccountConfigs={{ client_id: "399114662979-8akjgk6e9fmmp1041doa7a8j9kvim6pv.apps.googleusercontent.com" }} /> : null}
+            {showSideBar ? <Settings onFavListClick={handleOnAutoClick}  onFavClick={handleSave} alerts={alerts} favourites={favs} handleSave={handleSave} userInfo={userInfo} /> : null}
             <div>
               <div>
-                {data.location ? <NavBar onHamClick={handleOnHamClick} showSideBar={showSideBar} location={data.location} onAutoClick={handleOnAutoClick} /> : null}
+                {data.location ? <NavBar favourites={favs} onFavClick={handleSave} data={data} onHamClick={handleOnHamClick} showSideBar={showSideBar} location={data.location} onAutoClick={handleOnAutoClick} /> : null}
                 {data.forecast ? (
                   <div className="App">
                     <Clouds
@@ -134,7 +229,7 @@ function App() {
                     <AirQuality airQuality={data.current.air_quality} mainPollutant={mainPollutant} aqi={formatAirQ(airQuality['gb-defra-index'])} />
                     <Temperature forecast={data.forecast.forecastday[0].hour} />
                     <Wind wind={windM} current={data.current} forecast={data.forecast.forecastday[0].hour} />
-                    <SunMoon data={data}/>
+                    <SunMoon data={data} />
                     <ForeCast current={data.current} forecastArr={data.forecast.forecastday[0].hour} />
                   </div>
                 ) : null}
@@ -144,19 +239,6 @@ function App() {
         </Route>
       </Switch>
     </BrowserRouter>
-
-    // <div>
-    // 
-    // </div>
-    // <div>
-    //  
-    // </div>
-
-    // <div>
-    //  
-    // </div>
-
-
   )
 }
 
