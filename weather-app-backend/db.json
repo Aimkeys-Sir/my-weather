@@ -1,0 +1,12 @@
+{
+    "userdata": [
+        {
+            "id": 1,
+            "user": "aimkeys@gmail.com",
+            "temp": true,
+            "precip": true,
+            "wind": true,
+            "favourites":["Mombasa","gatura"]
+        }
+    ]
+}
