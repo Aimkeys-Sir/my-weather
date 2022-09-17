@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { faFaceGrin, faMaskFace, faFaceSadTear, faFaceGrinTears } from "@fortawesome/free-solid-svg-icons"
 
 import "./App.css";
+import {useLocalStorage,UseDocumentTitle} from './components/customHooks/hooks'
 import NavBar from "./components/NavBar";
 import Clouds from "./components/Clouds";
 import AirQuality from "./components/AirQuality";
@@ -29,6 +30,9 @@ function App() {
   const [favs, setFavs] = useState([])
   const [alerts, setAlerts] = useState("")
   const [units,setUnits]=useState({temp:"c",wind:"kph",precip:"mm"})
+
+
+  UseDocumentTitle('Weather Awesome')
 
 
   let airQuality
